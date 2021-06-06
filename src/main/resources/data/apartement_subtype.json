@@ -1,0 +1,45 @@
+{
+  "Apartment": {
+    "Studio": "A one-room apartment that comes with a kitchen and a full-size bathroom. Variations of a studio include an alcove studio or a convertible studio",
+    "Alcove Studio": " The same as a regular studio but generally has an L partition in the living room. This creates the perception of more space and is really nice to use for a sleeping area.",
+    "Convertible Studio": " A studio big enough such that one could build a wall to create a bedroom.",
+    "Convertible (Flex)": "An apartment that has enough space to be converted into an additional bedroom. Example: A large one bedroom apartment that has enough space to be walled off to create a 2nd bedroom may be advertised as a convertible two-bedroom (two bedroom flex). Watch out —Some apartments may not allow you to put up a dry wall or may have additional charges that come with installing a dry wall!",
+    "Loft": "One large room with high ceilings. These usually exist in commercial buildings that have been renovated to residential apartment units.",
+    "Duplex/Triplex": "Apartments with two or three levels respectively. The second or third floor may be used for sleeping quarters only. Junior 1 bedroom: This is a slight step up from a studio and usually includes a separate sleeping room or ¾ room.",
+    "Junior 1 Bedroom": "This is a slight step up from a studio and usually includes a separate sleeping room or 3/4 room.",
+    "1 Bedroom" : "This type of unit comprises of a bedroom that comes with a closet and a door that can be closed, a living room area that is separate, a kitchen, and a bathroom. Some one-bedroom apartments utilize an open plan concept where there are no walls separating the living room area and the kitchen so as to maximize on space.",
+    "2 bedroom": "A two bedroom apartment consists of two separate bedrooms, each with one window or more and a door that can be closed, a living room area, a kitchen, and at least one bathroom. They are more spacious than one bedroom apartments, hence the monthly rent is higher.",
+    "3,4,5 bedroom": "Three, four, and five bedroom rental units have layouts that are similar to that of a two bedroom apartment, with the main difference being additional bedrooms, and possibly more bathrooms as well. Apartments that are of this size are not too common in major cities due to lack of space. In areas that are densely populated such as New York City, these units will generally account for around 5% of the apartments.",
+    "Garden Apartment": "A garden apartment has access to a backyard and almost always is on the ground floor, but sometimes can also be on the basement level. These are especially important to check out before signing anything – being partially underground is not ideal. Garden apartments can also be problematic for security reasons, and they tend to have more pests.",
+    "Railroad Apartment": "These are found in smaller and older buildings and are named for their straight floor plan. There are usually three or four rooms that are all connected without a hallway, forming a long and thin rectangle. Bedrooms can be on either side or in the center."
+  },
+  "House" : [
+    "Apartment",
+    "Single-Family Attached",
+    "Single-Family Detached",
+    "Tiny Home",
+    "Townhome",
+    "Cape Cod",
+    "Colonial",
+    "Contemporary",
+    "Cottage",
+    "Craftsman",
+    "Greek Revival",
+    "Farmhouse",
+    "French Country",
+    "Mediterranean",
+    "Ranch",
+    "Split-Level",
+    "Victorian"
+    ],
+  "Garage" :[
+    "Standard Garage",
+    "Apartment Garage",
+    "Colonial Garage",
+    "Shop Garage",
+    "Oversized Garage",
+    "SUV Garage",
+    "Compact Garage"
+
+  ]
+}
