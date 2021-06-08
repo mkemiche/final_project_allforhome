@@ -33,7 +33,7 @@ public class PrepertyControllerAPI {
     }
 
     @PostMapping("/newproperty")
-    public void newProperty(@RequestBody Property property){
+    public void newProperty(@RequestBody Object property){
         propertyService.createProperty(property);
     }
 

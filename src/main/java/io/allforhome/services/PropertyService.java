@@ -1,15 +1,14 @@
 package io.allforhome.services;
 
 import io.allforhome.exceptions.ResourceNotFoundException;
-import io.allforhome.models.Image;
 import io.allforhome.models.Property;
-import io.allforhome.models.RegistrationDate;
+import io.allforhome.models.PropertyManager;
 import io.allforhome.repositories.PropertyRepository;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +24,9 @@ public class PropertyService {
     ImageUploadService imageUploadService;
 
     @Autowired
+    PropertyManager propertyManager;
+
+    @Autowired
     private PropertyRepository propertyRepository;
 
     public List<Property> getAllProperties(){
@@ -32,16 +34,14 @@ public class PropertyService {
     }
 
 
-    public void createProperty(Property property){
-        if(property == null){
+    public void createProperty(Object p){
+        if(p == null){
             log.severe("Try to add property null");
             throw new ResourceNotFoundException();
         }
-        RegistrationDate rd = new RegistrationDate(LocalDateTime.now());
-        property.setPUpdateDate(rd);
-        List<Image> images = imageUploadService.getAllImagesByRefProperty(property.getPReference());
-        property.setPImages(images);
-        propertyRepository.save(property);
+
+        LinkedHashMap<Object, Object> map = (LinkedHashMap) p;
+
     }
 
     public void updateProperty(Property property){

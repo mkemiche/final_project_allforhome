@@ -2,8 +2,11 @@ package io.allforhome.models;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @author mkemiche
@@ -12,23 +15,25 @@ import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
+@RequiredArgsConstructor
 @Entity
 @Table(name = "location")
-public class Location {
+public class Location implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "int(11) UNSIGNED")
     private Long id;
-    private String address;
-    private String city;
-    private int zipcode;
-    private String state;
 
-    public Location(String address, String city, int zipcode, String state) {
-        this.address = address;
-        this.city = city;
-        this.zipcode = zipcode;
-        this.state = state;
-    }
+    @NonNull
+    private String address;
+
+    @NonNull
+    private String city;
+
+    @NonNull
+    private int zipcode;
+
+    @NonNull
+    private String state;
 }

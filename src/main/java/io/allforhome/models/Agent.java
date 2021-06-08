@@ -2,6 +2,8 @@ package io.allforhome.models;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.DiscriminatorValue;
@@ -14,20 +16,18 @@ import javax.persistence.Entity;
 
 @Data
 @NoArgsConstructor
+@RequiredArgsConstructor
 @Entity
 @SuperBuilder
 @DiscriminatorValue("agent")
 public class Agent extends User{
 
+    @NonNull
     private String title;
+
+    @NonNull
     private String agentFirstName;
+
+    @NonNull
     private String agentLastName;
-
-
-    public Agent(String email, String password, String roles, String title, String agentFirstName, String agentLastName) {
-        super(email, password, roles);
-        this.title = title;
-        this.agentFirstName = agentFirstName;
-        this.agentLastName = agentLastName;
-    }
 }

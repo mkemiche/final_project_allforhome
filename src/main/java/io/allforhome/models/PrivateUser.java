@@ -1,5 +1,6 @@
 package io.allforhome.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -14,15 +15,12 @@ import javax.persistence.Entity;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @DiscriminatorValue("private_user")
 @SuperBuilder
 public class PrivateUser extends User {
 
-    private String username;
 
-    public PrivateUser(String email, String password, String roles, String username) {
-        super(email, password, roles);
-        this.username = username;
-    }
+    private String username;
 }

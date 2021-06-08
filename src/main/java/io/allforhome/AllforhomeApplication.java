@@ -37,22 +37,23 @@ public class AllforhomeApplication implements CommandLineRunner {
 		Location loc3 = new Location("7762 street two","New Albany",43320,"OH");
 
 
-		PrivateUser user1 = new PrivateUser("user1@gmail.com","pass", String.format("%s",Role.ROLE_PRIVATE_USER),"user1");
-		PrivateUser user2 = new PrivateUser("user2@gmail.com","pass", String.format("%s",Role.ROLE_PRIVATE_USER),"user2");
-		PrivateUser user3 = new PrivateUser("user3@gmail.com","pass", String.format("%s",Role.ROLE_PRIVATE_USER),"user3");
-		PrivateUser user4 = new PrivateUser("user4@gmail.com","pass", String.format("%s",Role.ROLE_PRIVATE_USER),"user4");
+		PrivateUser user1 = PrivateUser.builder().email("user1@gmail.com").password("pass").roles(String.format("%s",Role.ROLE_PRIVATE_USER)).username("user1").build();
+		PrivateUser user2 = PrivateUser.builder().email("user1@gmail.com").password("pass").roles(String.format("%s",Role.ROLE_PRIVATE_USER)).username("user1").build();
+		PrivateUser user3 = PrivateUser.builder().email("user1@gmail.com").password("pass").roles(String.format("%s",Role.ROLE_PRIVATE_USER)).username("user1").build();
+		PrivateUser user4 = PrivateUser.builder().email("user1@gmail.com").password("pass").roles(String.format("%s",Role.ROLE_PRIVATE_USER)).username("user1").build();
 
 		userService.saveUser(user1);
 		userService.saveUser(user2);
 		userService.saveUser(user3);
 		userService.saveUser(user4);
 
-		Agent agent1 = new Agent("agent1","pass",String.format("%s",Role.ROLE_AGENT_ADMIN), Title.MR.getTitle(), "marc","daniel");
-		Agent agent2 = new Agent("agent2","pass",String.format("%s",Role.ROLE_AGENT_ADMIN), Title.MR.getTitle(), "marc","daniel");
-		Agent agent3 = new Agent("agent3","pass",String.format("%s",Role.ROLE_AGENT_ADMIN), Title.MR.getTitle(), "marc","daniel");
-		Agent agent4 = new Agent("agent4","pass",String.format("%s",Role.ROLE_AGENT_USER), Title.MR.getTitle(), "marc","daniel");
-		Agent agent5 = new Agent("agent5","pass",String.format("%s",Role.ROLE_AGENT_USER), Title.MR.getTitle(), "marc","daniel");
-		Agent agent6 = new Agent("agent6","pass",String.format("%s",Role.ROLE_AGENT_USER), Title.MR.getTitle(), "marc","daniel");
+		Agent agent1 = Agent.builder().email("agent1@gmail.com").password("pass").roles(String.format("%s",Role.ROLE_AGENT_ADMIN)).title(Title.MR.getTitle()).agentFirstName("marc").agentLastName("daniel").build();
+		Agent agent2 = Agent.builder().email("agent2@gmail.com").password("pass").roles(String.format("%s",Role.ROLE_AGENT_ADMIN)).title(Title.MS.getTitle()).agentFirstName("Stephanie").agentLastName("dupond").build();
+		Agent agent3 = Agent.builder().email("agent3@gmail.com").password("pass").roles(String.format("%s",Role.ROLE_AGENT_ADMIN)).title(Title.MR.getTitle()).agentFirstName("Robert").agentLastName("call").build();
+		Agent agent4 = Agent.builder().email("agent4@gmail.com").password("pass").roles(String.format("%s",Role.ROLE_AGENT_ADMIN)).title(Title.MR.getTitle()).agentFirstName("Ted").agentLastName("Foster").build();
+		Agent agent5 = Agent.builder().email("agent5@gmail.com").password("pass").roles(String.format("%s",Role.ROLE_AGENT_ADMIN)).title(Title.MS.getTitle()).agentFirstName("Bithany").agentLastName("daniel").build();
+		Agent agent6 = Agent.builder().email("agent6@gmail.com").password("pass").roles(String.format("%s",Role.ROLE_AGENT_ADMIN)).title(Title.MS.getTitle()).agentFirstName("Giselle").agentLastName("Scott").build();
+
 
 
 		RSAgency company = new RSAgency("AZFY2666276","company name one","6149826776", loc,List.of(agent1));
@@ -79,6 +80,7 @@ public class AllforhomeApplication implements CommandLineRunner {
 		imageUploadRepository.save(image2);
 		imageUploadRepository.save(image3);
 		imageUploadRepository.save(image4);
+
 
 
 

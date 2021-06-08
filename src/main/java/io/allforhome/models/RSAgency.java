@@ -1,10 +1,9 @@
 package io.allforhome.models;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -14,40 +13,34 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-
+@RequiredArgsConstructor
 @Entity
 @Table(name = "rs_agency")
-public class RSAgency {
+public class RSAgency implements Serializable {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "int(11) UNSIGNED")
     private Long id;
 
     @Column(name = "company_number")
+    @NonNull
     private String companyNumber;
 
     @Column(name = "company_name")
+    @NonNull
     private String companyName;
 
     @Column(name = "company_phone")
+    @NonNull
     private String companyPhone;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id")
+    @NonNull
     private Location companyLocation;
 
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
+    @NonNull
     List<Agent> agents;
-
-    public RSAgency(String companyNumber, String companyName, String companyPhone, Location companyLocation, List<Agent> agents) {
-        this.companyNumber = companyNumber;
-        this.companyName = companyName;
-        this.companyPhone = companyPhone;
-        this.companyLocation = companyLocation;
-        this.agents = agents;
-    }
 }
