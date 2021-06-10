@@ -33,6 +33,15 @@ public class Property {
     private String pType;
     private String pBuiltYear;
 
+    private double pPrice;
+    private double pArea;
+    private int pBedrooms;
+    private int pBathrooms;
+    private boolean hasBasement;
+    private boolean hasBalcony;
+    private boolean hasTerrace;
+    private boolean hasSPool;
+
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "Registration_id")
     private RegistrationDate pUpdateDate = new RegistrationDate();
@@ -48,16 +57,7 @@ public class Property {
     @ToString.Exclude
     private List<Image> pImages = new ArrayList<>();
 
-    private double pPrice;
-    private double pArea;
-    private int pBedrooms;
-    private int pBathrooms;
-    private boolean hasBasement;
-    private boolean hasBalcony;
-    private boolean hasTerrace;
-    private boolean hasSPool;
-
-    public Property(String pReference, String pTitle, String pDescription, String pStatus, String pCategory, String pType, String pBuiltYear, RegistrationDate pUpdateDate, Location pLocation, List<Image> pImages, double pPrice, double pArea, int pBedrooms, int pBathrooms, boolean hasBasement, boolean hasBalcony, boolean hasTerrace, boolean hasSPool) {
+    public Property(String pReference, String pTitle, String pDescription, String pStatus, String pCategory, String pType, String pBuiltYear, double pPrice, double pArea, int pBedrooms, int pBathrooms, boolean hasBasement, boolean hasBalcony, boolean hasTerrace, boolean hasSPool, RegistrationDate pUpdateDate, Location pLocation, List<Image> pImages) {
         this.pReference = pReference;
         this.pTitle = pTitle;
         this.pDescription = pDescription;
@@ -65,9 +65,6 @@ public class Property {
         this.pCategory = pCategory;
         this.pType = pType;
         this.pBuiltYear = pBuiltYear;
-        this.pUpdateDate = pUpdateDate;
-        this.pLocation = pLocation;
-        this.pImages = pImages;
         this.pPrice = pPrice;
         this.pArea = pArea;
         this.pBedrooms = pBedrooms;
@@ -76,5 +73,8 @@ public class Property {
         this.hasBalcony = hasBalcony;
         this.hasTerrace = hasTerrace;
         this.hasSPool = hasSPool;
+        this.pUpdateDate = pUpdateDate;
+        this.pLocation = pLocation;
+        this.pImages = pImages;
     }
 }

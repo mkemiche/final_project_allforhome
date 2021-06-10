@@ -1,0 +1,41 @@
+body{
+    background-color: #f8f9fa !important;
+}
+
+.form-scrollspy {
+    position:sticky;
+    top: 10px;
+}
+
+.title-step  {
+    box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+    padding: 50px;
+    margin-bottom:30px;
+    border-radius:10px;
+}
+
+.descirption-step  {
+    box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+    padding: 50px;
+    margin-bottom:30px;
+    border-radius:10px;
+}
+
+.details-step  {
+    box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+    padding: 50px;
+    margin-bottom:30px;
+    border-radius:10px;
+}
+
+.attached-step {
+    box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+    padding: 50px;
+    margin-bottom:30px;
+    border-radius:10px;
+}
+
+.container>.row{
+    margin: 80px auto;
+}
+

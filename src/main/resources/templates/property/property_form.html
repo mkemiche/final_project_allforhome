@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+    <head>
+        <div th:replace="fragments/head :: myHead"></div>
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar"></div>
+
+        <main>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <nav id="navbar-example3" class="navbar navbar-light bg-light flex-column align-items-stretch p-3 form-scrollspy">
+                            <nav class="nav nav-pills flex-column">
+                                <a class="nav-link" href="#section-1">Title</a>
+                                <a class="nav-link" href="#section-2">Description</a>
+                                <a class="nav-link" href="#section-3">Details</a>
+                                <a class="nav-link" href="#section-4">Images</a>
+
+                            </nav>
+                        </nav>
+                    </div>
+                    <div class="col-md-8">
+                        <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-offset="10" tabindex="0">
+                            <div id="section-1" class="title-step">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>Title</h4>
+                                        <div class="form-floating mb-3">
+                                            <input type="email" class="form-control" id="floatingInput" placeholder="title">
+                                            <label for="floatingInput">Enter title</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>Category</h4>
+                                        <input type="radio" class="btn-check" name="options-outlined" id="house" autocomplete="off">
+                                        <label class="btn btn-outline-success" for="house">House</label>
+
+                                        <input type="radio" class="btn-check" name="options-outlined" id="apartment" autocomplete="off">
+                                        <label class="btn btn-outline-success" for="apartment">Apartment</label>
+
+                                        <input type="radio" class="btn-check" name="options-outlined" id="garage" autocomplete="off">
+                                        <label class="btn btn-outline-success" for="garage">Garage</label>
+
+                                        <input type="radio" class="btn-check" name="options-outlined" id="lot" autocomplete="off">
+                                        <label class="btn btn-outline-success" for="lot">Lots</label>
+
+                                        <input type="radio" class="btn-check" name="options-outlined" id="other" autocomplete="off">
+                                        <label class="btn btn-outline-success" for="other">Other</label>
+                                    </div>
+                                </div>
+                                <a href="#section-2" class="btn btn-primary">Go to next step <i class="fa fa-arrow-right"></i></a>
+                            </div>
+                            <div id="section-2" class="descirption-step">
+                                <h4>Description</h4>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-floating">
+                                            <select class="form-select" id="status" aria-label="Floating label select example">
+                                                <option selected>Select status</option>
+                                                <option value="1">For Rent</option>
+                                                <option value="2">For Sale</option>
+                                            </select>
+                                            <label for="status">Status of property</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-floating">
+                                            <textarea class="form-control" placeholder="Leave a description here" id="description"></textarea>
+                                            <label for="description">Description</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#section-3" class="btn btn-primary">Go to next step <i class="fa fa-arrow-right"></i></a>
+                            </div>
+                            <div id="section-3" class="details-step">
+                                <h4>Details</h4>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <select class="form-select" id="bedroom" aria-label="Floating label select example">
+                                                <option selected>Bedrooms</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                            <label for="bedroom">How many Bedrooms ?</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <select class="form-select" id="bathrooms" aria-label="Floating label select example">
+                                                <option selected>bathroom</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                            <label for="bathrooms">How many Bathrooms ?</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="area">Area</label>
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" placeholder="ex: 2000" id="area">
+                                            <span class="input-group-text" id="basic-addon2">Sqrt feet</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="price">Price</label>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">$</span>
+                                            <input type="text" class="form-control" id="price" aria-label="Price (to the nearest dollar)">
+                                            <span class="input-group-text">.00</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="buityear" class="form-label">built's year</label>
+                                            <input type="text" class="form-control" id="buityear" placeholder="ex: 1992">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h5>Choose more details</h5>
+                                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                                            <input type="checkbox" class="btn-check" id="basement" autocomplete="off">
+                                            <label class="btn btn-outline-primary" for="basement">Has basement</label>
+
+                                            <input type="checkbox" class="btn-check" id="terrasse" autocomplete="off">
+                                            <label class="btn btn-outline-primary" for="terrasse">Has a terrasse</label>
+
+                                            <input type="checkbox" class="btn-check" id="pool" autocomplete="off">
+                                            <label class="btn btn-outline-primary" for="pool">Has a swimming pool</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#section-4" class="btn btn-primary">Go to next step <i class="fa fa-arrow-right"></i></a>
+                            </div>
+                            <div id="section-4"  class="attached-step">
+                                <h4>Attached pictures</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae corporis culpa et exercitationem fugit ipsam itaque odit optio quasi qui, recusandae rem sint tenetur! Minus perspiciatis quisquam reiciendis repellat vero?</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae corporis culpa et exercitationem fugit ipsam itaque odit optio quasi qui, recusandae rem sint tenetur! Minus perspiciatis quisquam reiciendis repellat vero?</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae corporis culpa et exercitationem fugit ipsam itaque odit optio quasi qui, recusandae rem sint tenetur! Minus perspiciatis quisquam reiciendis repellat vero?</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae corporis culpa et exercitationem fugit ipsam itaque odit optio quasi qui, recusandae rem sint tenetur! Minus perspiciatis quisquam reiciendis repellat vero?</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae corporis culpa et exercitationem fugit ipsam itaque odit optio quasi qui, recusandae rem sint tenetur! Minus perspiciatis quisquam reiciendis repellat vero?</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae corporis culpa et exercitationem fugit ipsam itaque odit optio quasi qui, recusandae rem sint tenetur! Minus perspiciatis quisquam reiciendis repellat vero?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <div th:replace="fragments/footer :: myFooter"></div>
+    </body>
+</html>
