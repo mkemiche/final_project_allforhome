@@ -1,5 +1,6 @@
 package io.allforhome.services;
 
+import io.allforhome.enums.Role;
 import io.allforhome.models.User;
 import io.allforhome.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ public class UserService {
     UserRepository userRepository;
 
     public void saveUser(User user){
+        user.setURoles(Role.ROLE_PRIVATE_USER.getRole());
         userRepository.save(user);
     }
 

@@ -2,11 +2,11 @@ package io.allforhome.controllers;
 
 import io.allforhome.models.Property;
 import io.allforhome.services.PropertyService;
+import io.allforhome.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -16,43 +16,44 @@ import java.util.List;
  */
 
 @Controller
-@RequestMapping("property")
 public class PropertyController {
 
     @Autowired
     private PropertyService propertyService;
 
+    @ModelAttribute("property")
+    public Property initProperty(){
+        return new Property();
+    }
 
-    @GetMapping("/getallproperties")
+    @RequestMapping(value = "property/getallproperties", method = RequestMethod.GET)
     public String getAllProperties(Model model){
         List<Property> properties = propertyService.getAllProperties();
         model.addAttribute("properties", properties);
         return null;
     }
 
-    @GetMapping("/newproperty")
-    public String newPropertyForm(){
-        return "property/property_form";
+    @RequestMapping(value = "property/newproperty", method = RequestMethod.GET)
+    public String newPropertyForm(Model model){
+        String ref = Utils.generatePropertyRef();
+        model.addAttribute("refProperty", ref);
+        return "property/register_property";
     }
 
-
-    @PostMapping("/newproperty")
-    public String saveProperty(@RequestParam("file") MultipartFile file,
-                               @ModelAttribute("property") Property property,
-                               Model model){
-
+    @RequestMapping(value = "property/newproperty", method = RequestMethod.POST)
+    public String saveProperty(@ModelAttribute("property") Property property, Model model){
         propertyService.createProperty(property);
         return null;
     }
 
-    @PutMapping("/{id}/updateproperty")
+    @RequestMapping(value = "property/{id}/updateproperty", method = RequestMethod.PUT)
     public String updateProperty(@PathVariable("id") Long id, @ModelAttribute("property") Property property){
         propertyService.updateProperty(property);
 
         return null;
     }
 
-    @DeleteMapping("/{id}/deleteproperty")
+    @RequestMapping(value = "property/{id}/deleteproperty", method = RequestMethod.DELETE)
     public String deleteProperty(@PathVariable("id") Long id){
         propertyService.removeProperty(id);
 

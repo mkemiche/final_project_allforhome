@@ -32,7 +32,7 @@ public class ImageUploadService {
 
 
 
-    public String saveImage(MultipartFile file, String pRef, Long userId){
+    public String saveImage(MultipartFile file, String pRef){
         String originalName = StringUtils.cleanPath(file.getOriginalFilename());
         String fileName ="";
         String fileExtension = "";
