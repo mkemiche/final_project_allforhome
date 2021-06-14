@@ -19,10 +19,9 @@ public class ImageUploadControllerAPI {
 
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST, produces = "application/json")
     public String handleImageUpload(@RequestParam("file") MultipartFile file,
-                                    @RequestParam("pRef") String preference,
-                                    @RequestParam("userid") Long userId){
+                                    @RequestParam("pRef") String preference){
 
-        String filename = imageUploadService.saveImage(file, preference, userId);
+        String filename = imageUploadService.saveImage(file, preference);
 
         return filename;
     }

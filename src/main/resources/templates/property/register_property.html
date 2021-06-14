@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+    <head>
+        <div th:replace="fragments/head :: myHead"></div>
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar"></div>
+
+        <main>
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-11 col-sm-10 col-md-10 text-center p-0 mt-3 mb-2">
+                        <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                            <h2 id="heading">Post a property Ad</h2>
+                            <p>Fill all form required field to go to next step</p>
+                            <form id="msform" th:action="@{./newproperty}" method="post" th:object="${property}">
+                                <!-- progressbar -->
+                                <ul id="progressbar">
+                                    <li class="active" id="category"><strong>Introduction</strong></li>
+                                    <li id="description"><strong>Description</strong></li>
+                                    <li id="details"><strong>Details</strong></li>
+                                    <li id="images"><strong>Image</strong></li>
+                                    <li id="confirm"><strong>Finish</strong></li>
+                                </ul>
+                               <!-- <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div> <br> &lt;!&ndash; fieldsets &ndash;&gt;-->
+                                <fieldset>
+                                    <div class="form-card">
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <h2 class="fs-title">Property informations :</h2>
+                                            </div>
+                                            <div class="col-5">
+                                                <h2 class="steps">Step 1 - 5</h2>
+                                            </div>
+                                        </div>
+                                        <div class="intro">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-10">
+                                                        <label class="fieldlabels" for="title">Title</label>
+                                                        <input type="text" class="form-control" id="title" placeholder="Insert some introduction..." th:field="*{pTitle}">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label for="ref">Reference: </label>
+                                                        <span id="ref" th:text="${refProperty}" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <label class="fieldlabels">Category: *</label><br>
+                                            <div class="btn btn-outline-primary">
+                                                <i class="fas fa-home"></i><br>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" id="home" name="category" class="custom-control-input" th:field="*{pCategory}" value = "HOME">
+                                                    <label class="custom-control-label" for="home">home</label>
+                                                </div>
+                                            </div>
+                                            <div class="btn btn-outline-primary">
+                                                <i class="fas fa-building"></i><br>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" id="apartment" name="category" class="custom-control-input" th:field="*{pCategory}" value = "APARTMENT">
+                                                    <label class="custom-control-label" for="apartment">Apartment</label>
+                                                </div>
+                                            </div>
+                                            <div class="btn btn-outline-primary">
+                                                <i class="fas fa-warehouse"></i><br>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" id="garage" name="category" class="custom-control-input" th:field="*{pCategory}" value="GARAGE">
+                                                    <label class="custom-control-label" for="garage">Garage</label>
+                                                </div>
+                                            </div>
+                                            <div class="btn btn-outline-primary">
+                                                <i class="fas fa-mountain"></i><br>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" id="lot" name="category" class="custom-control-input" th:field="*{pCategory}" value="LOT">
+                                                    <label class="custom-control-label" for="lot">Lot</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="button" name="next" class="next action-button" value="Next" />
+                                </fieldset>
+                                <fieldset>
+                                    <div class="form-card">
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <h2 class="fs-title">Property description : </h2>
+                                            </div>
+                                            <div class="col-5">
+                                                <h2 class="steps">Step 2 - 5 </h2>
+                                            </div>
+                                        </div>
+                                        <div class="desc">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group border-lable-flt">
+                                                            <select class="form-control" id="status" th:field="*{pStatus}" placeholder=" ">
+                                                                <option value="0"></option>
+                                                                <option th:each="status : ${T(io.allforhome.enums.Status).values()}"
+                                                                        th:value="${status}" th:text="${status}"></option>
+                                                            </select>
+                                                            <label class="lbl" for="label-type">Property status: </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group border-lable-flt">
+                                                            <input type="text" id="label-type" class="form-control" th:field="*{pType}" placeholder="ex: combo">
+                                                            <label class="lbl" for="label-type">Property type: </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group border-lable-flt">
+                                                <textarea class="form-control" id="descrip" rows="5" th:field="*{pDescription}" placeholder=" "></textarea>
+                                                <label class="lbl" for="label-type">Property description: </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="button" name="next" class="next action-button" value="Next" />
+                                    <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                </fieldset>
+                                <fieldset>
+                                    <div class="form-card">
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <h2 class="fs-title">Property details : </h2>
+                                            </div>
+                                            <div class="col-5">
+                                                <h2 class="steps">Step 3 - 5</h2>
+                                            </div>
+                                        </div>
+                                        <div class="details">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="bedrooms">How many bedrooms ?</label>
+                                                        <select class="form-control" id="bedrooms" th:field="*{pBedrooms}">
+                                                            <option value="0"></option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="bathrooms">How many bathrooms ?</label>
+                                                        <select class="form-control" id="bathrooms" th:field="*{pBathrooms}">
+                                                            <option value="0"></option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group border-lable-flt">
+                                                        <input type="text" id="label-area" class="form-control" th:field="*{pArea}" placeholder=" ">
+                                                        <label class="lbl" for="label-area"><i class="fas fa-vector-square common"></i>Area (ft2): </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group border-lable-flt">
+                                                        <input type="text" id="label-price" class="form-control" th:field="*{pPrice}" placeholder=" ">
+                                                        <label class="lbl" for="label-price"><i class="fas fa-dollar-sign common"></i>Price: </label>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group border-lable-flt">
+                                                        <input type="text" id="label-year" class="form-control" th:field="*{pBuiltYear}" placeholder="ex: 1992 ">
+                                                        <label class="lbl" for="label-year"><i class="fas fa-calendar-week common"></i>Build's year: </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h4>Choose more details</h4><br>
+                                                    <div class="more-details">
+                                                        <div class="btn btn-outline-primary">
+                                                            <input id="hgarage" type="checkbox" th:field="*{hasGarage}"/>
+                                                            <label for="hgarage">Has a garage</label>
+                                                        </div>
+                                                        <div class="btn btn-outline-primary">
+                                                            <input id="basement" type="checkbox" th:field="*{hasBasement}"/>
+                                                            <label for="basement">Has a basement</label>
+                                                        </div>
+                                                        <div class="btn btn-outline-primary">
+                                                            <input id="terrasse" type="checkbox" th:field="*{hasTerrace}"/>
+                                                            <label for="terrasse">Has a terrasse</label>
+                                                        </div>
+                                                        <div class="btn btn-outline-primary">
+                                                            <input id="garden" type="checkbox" th:field="*{hasGarden}"/>
+                                                            <label for="garden">Has a garden</label>
+                                                        </div>
+                                                        <div class="btn btn-outline-primary">
+                                                            <input id="pool" type="checkbox" th:field="*{hasSPool}"/>
+                                                            <label for="pool">Has a swimming pool</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="button" name="next" class="next action-button" value="Next" />
+                                    <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                </fieldset>
+
+                                <fieldset>
+                                    <div class="form-card">
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <h2 class="fs-title">Images Upload:</h2>
+                                            </div>
+                                            <div class="col-5">
+                                                <h2 class="steps">Step 4 - 5</h2>
+                                            </div>
+                                        </div>
+                                        <div class="images">
+                                            <div class="pic">
+                                                <i class="fa fa-upload"></i><br>
+                                                Click to upload
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <input type="submit" name="next" class="next action-button" value="Submit" />
+                                    <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                </fieldset>
+                                <fieldset>
+                                    <div class="form-card">
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <h2 class="fs-title">Finish:</h2>
+                                            </div>
+                                            <div class="col-5">
+                                                <h2 class="steps">Step 5 - 5</h2>
+                                            </div>
+                                        </div> <br><br>
+                                        <h2 class="purple-text text-center"><strong>SUCCESS !</strong></h2> <br>
+                                        <div class="row justify-content-center">
+                                            <div class="col-3"> <img src="https://i.imgur.com/GwStPmg.png" class="fit-image"> </div>
+                                        </div> <br><br>
+                                        <div class="row justify-content-center">
+                                            <div class="col-7 text-center">
+                                                <h5 class="purple-text text-center">You Have Successfully Signed Up</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <div th:replace="fragments/footer :: myFooter"></div>
+    </body>
+</html>

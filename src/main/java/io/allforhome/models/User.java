@@ -22,15 +22,15 @@ public class User {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "int(11) UNSIGNED")
-    private Long id;
+    private Long uId;
 
-    private String email;
-    private String password;
-    private String roles;
+    private String uEmail;
+    private String uPassword;
+    private String uRoles;
 
-    public User(String email, String password, String roles) {
-        this.email = email;
-        this.password = password;
-        this.roles = roles;
+    public User(String uEmail, String uPassword, String uRoles) {
+        this.uEmail = uEmail;
+        this.uPassword = uPassword;
+        this.uRoles = uRoles;
     }
 }
