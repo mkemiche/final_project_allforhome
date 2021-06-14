@@ -30,7 +30,11 @@ public class ImageUploadService {
     ImageUploadRepository imageUploadRepository;
 
 
-
+    public void saveImage(MultipartFile[] files, String pRef){
+        for (MultipartFile file : files) {
+            saveImage(file, pRef);
+        }
+    }
 
     public String saveImage(MultipartFile file, String pRef){
         String originalName = StringUtils.cleanPath(file.getOriginalFilename());

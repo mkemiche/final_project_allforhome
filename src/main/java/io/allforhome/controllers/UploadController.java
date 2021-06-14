@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.io.File;
-
 /**
  * @author mkemiche
  * @created 10/06/2021
@@ -20,16 +18,29 @@ public class UploadController {
     @Autowired
     private ImageUploadService imageUploadService;
 
+    @ModelAttribute("pReference")
+    public String initRef(){
+        return "";
+    }
+
+    @GetMapping("/uploadForm")
+    public String uploadFile(){
+        return "img-upload";
+    }
+
+
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public String uploadFile(@ModelAttribute("file") MultipartFile file,
                              @RequestParam("pReference") String ref,
-                             RedirectAttributes redirectAttributes){
-        String filename = imageUploadService.saveImage(file, ref);
+                             RedirectAttributes redirectAttributes) {
 
-        redirectAttributes.addFlashAttribute("message", "You successfully uploaded " + filename);
-        redirectAttributes.addFlashAttribute("filename", "fileupload"+ File.separator+filename);
+        imageUploadService.saveImage(file, ref);
 
-        return "redirect:/property/newproperty";
+       // List<String> filesUploaded = imageUploadService.getAllImagesByRefProperty(ref).stream().map(i-> "fileupload" + File.separator + i.getImageName()).collect(Collectors.toList());
+        //redirectAttributes.addFlashAttribute("message", "You successfully uploaded " + filename);
+       // redirectAttributes.addFlashAttribute("files", filesUploaded);
+
+        return "redirect:/uploadForm";
     }
 
 }

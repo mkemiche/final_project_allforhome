@@ -37,10 +37,12 @@ public class Property {
     private double pArea;
     private int pBedrooms;
     private int pBathrooms;
+    private boolean hasGarage;
     private boolean hasBasement;
     private boolean hasBalcony;
     private boolean hasTerrace;
     private boolean hasSPool;
+    private boolean hasGarden;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "Registration_id")
@@ -57,7 +59,7 @@ public class Property {
     @ToString.Exclude
     private List<Image> pImages = new ArrayList<>();
 
-    public Property(String pReference, String pTitle, String pDescription, String pStatus, String pCategory, String pType, String pBuiltYear, double pPrice, double pArea, int pBedrooms, int pBathrooms, boolean hasBasement, boolean hasBalcony, boolean hasTerrace, boolean hasSPool, RegistrationDate pUpdateDate, Location pLocation, List<Image> pImages) {
+    public Property(String pReference, String pTitle, String pDescription, String pStatus, String pCategory, String pType, String pBuiltYear, double pPrice, double pArea, int pBedrooms, int pBathrooms, boolean hasGarage, boolean hasBasement, boolean hasBalcony, boolean hasTerrace, boolean hasSPool, boolean hasGarden, RegistrationDate pUpdateDate, Location pLocation, List<Image> pImages) {
         this.pReference = pReference;
         this.pTitle = pTitle;
         this.pDescription = pDescription;
@@ -69,9 +71,11 @@ public class Property {
         this.pArea = pArea;
         this.pBedrooms = pBedrooms;
         this.pBathrooms = pBathrooms;
+        this.hasGarage = hasGarage;
         this.hasBasement = hasBasement;
         this.hasBalcony = hasBalcony;
         this.hasTerrace = hasTerrace;
+        this.hasGarden = hasGarden;
         this.hasSPool = hasSPool;
         this.pUpdateDate = pUpdateDate;
         this.pLocation = pLocation;

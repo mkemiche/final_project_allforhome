@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+  <head>
+    <div th:replace="fragments/head :: myHead"></div>
+  </head>
+  <body>
+    <div th:replace="fragments/navbar :: navbar"></div>
+    <!-- Page content-->
+
+    <div class="row">
+      <div class="col-md-12">
+        <form th:action="@{/uploadFile}" method="post" enctype="multipart/form-data" id="form-file2">
+          <label class="fieldlabels">Upload Your images:</label>
+          <input type="file" name="img" id="input-file2" accept="image/*" multiple>
+          <input type="text" name="pReference" >
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <dv class="col-md-12">
+        <div class="card-group">
+          <div class="card">
+            <img class="card-img-top" src="https://cdn.pixabay.com/photo/2017/05/03/22/08/image-2282302_1280.png" alt="Card image cap" id="card1">
+          </div>
+          <div class="card">
+            <img class="card-img-top" src="https://cdn.pixabay.com/photo/2017/05/03/22/08/image-2282302_1280.png" alt="Card image cap" id="card2">
+          </div>
+          <div class="card">
+            <img class="card-img-top" src="https://cdn.pixabay.com/photo/2017/05/03/22/08/image-2282302_1280.png" alt="Card image cap" id="card3">
+          </div>
+          <div class="card">
+            <img class="card-img-top" src="https://cdn.pixabay.com/photo/2017/05/03/22/08/image-2282302_1280.png" alt="Card image cap" id="card4">
+          </div>
+        </div>
+      </dv>
+    </div>
+    <div th:replace="fragments/footer :: myFooter"></div>
+  </body>
+</html>

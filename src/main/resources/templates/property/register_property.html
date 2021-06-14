@@ -38,38 +38,45 @@
                                             </div>
                                         </div>
                                         <div class="intro">
-                                            <input type="hidden" name="pReference" th:field="*{pReference}" th:value="${pReference}">
                                             <div class="form-group">
-                                                <label class="fieldlabels" for="title">Title</label>
-                                                <input type="text" class="form-control" id="title" placeholder="Insert some introduction..." th:field="*{pTitle}">
+                                                <div class="row">
+                                                    <div class="col-md-10">
+                                                        <label class="fieldlabels" for="title">Title</label>
+                                                        <input type="text" class="form-control" id="title" placeholder="Insert some introduction..." th:field="*{pTitle}">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label for="ref">Reference: </label>
+                                                        <span id="ref" th:text="${refProperty}" />
+                                                    </div>
+                                                </div>
                                             </div>
                                             <br>
                                             <label class="fieldlabels">Category: *</label><br>
                                             <div class="btn btn-outline-primary">
                                                 <i class="fas fa-home"></i><br>
                                                 <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" id="home" name="category" class="custom-control-input" th:field="*{pCategory}">
+                                                    <input type="radio" id="home" name="category" class="custom-control-input" th:field="*{pCategory}" value = "HOME">
                                                     <label class="custom-control-label" for="home">home</label>
                                                 </div>
                                             </div>
                                             <div class="btn btn-outline-primary">
                                                 <i class="fas fa-building"></i><br>
                                                 <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" id="apartment" name="category" class="custom-control-input" th:field="*{pCategory}">
+                                                    <input type="radio" id="apartment" name="category" class="custom-control-input" th:field="*{pCategory}" value = "APARTMENT">
                                                     <label class="custom-control-label" for="apartment">Apartment</label>
                                                 </div>
                                             </div>
                                             <div class="btn btn-outline-primary">
                                                 <i class="fas fa-warehouse"></i><br>
                                                 <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" id="garage" name="category" class="custom-control-input" th:field="*{pCategory}">
+                                                    <input type="radio" id="garage" name="category" class="custom-control-input" th:field="*{pCategory}" value="GARAGE">
                                                     <label class="custom-control-label" for="garage">Garage</label>
                                                 </div>
                                             </div>
                                             <div class="btn btn-outline-primary">
                                                 <i class="fas fa-mountain"></i><br>
                                                 <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" id="lot" name="category" class="custom-control-input" th:field="*{pCategory}">
+                                                    <input type="radio" id="lot" name="category" class="custom-control-input" th:field="*{pCategory}" value="LOT">
                                                     <label class="custom-control-label" for="lot">Lot</label>
                                                 </div>
                                             </div>
@@ -89,23 +96,30 @@
                                         </div>
                                         <div class="desc">
                                             <div class="form-group">
-                                                <label class="fieldlabels" for="status">Select status:</label>
-                                                <select class="form-control" id="status">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
-                                                </select>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group border-lable-flt">
+                                                            <select class="form-control" id="status" th:field="*{pStatus}" placeholder=" ">
+                                                                <option value="0"></option>
+                                                                <option th:each="status : ${T(io.allforhome.enums.Status).values()}"
+                                                                        th:value="${status}" th:text="${status}"></option>
+                                                            </select>
+                                                            <label class="lbl" for="label-type">Property status: </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group border-lable-flt">
+                                                            <input type="text" id="label-type" class="form-control" th:field="*{pType}" placeholder="ex: combo">
+                                                            <label class="lbl" for="label-type">Property type: </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </div>
-
-
-                                            <select name="pStatus">
-                                                <option th:each="status : ${T(io.allforhome.enums.Status).values()}"
-                                                        th:value="${status}" th:text="${status}"></option>
-                                            </select>
-                                            <label class="fieldlabels">Description: *</label>
-                                            <textarea class="form-control" id="descrip" rows="5" th:field="*{pDescription}"></textarea>
+                                            <div class="form-group border-lable-flt">
+                                                <textarea class="form-control" id="descrip" rows="5" th:field="*{pDescription}" placeholder=" "></textarea>
+                                                <label class="lbl" for="label-type">Property description: </label>
+                                            </div>
                                         </div>
                                     </div>
                                     <input type="button" name="next" class="next action-button" value="Next" />
@@ -124,65 +138,78 @@
                                         <div class="details">
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <div class="form-floating">
-                                                        <select class="form-select" id="bedroom" aria-label="Floating label select example" th:field="*{pBedrooms}">
-                                                            <option th:value="0" selected>Bedrooms</option>
-                                                            <option th:value="1" th:text="1"></option>
-                                                            <option th:value="2" th:text="2"></option>
-                                                            <option th:value="3" th:text="3"></option>
-                                                            <option th:value="4" th:text="4"></option>
-                                                            <option th:value="5" th:text="5"></option>
+                                                    <div class="form-group">
+                                                        <label for="bedrooms">How many bedrooms ?</label>
+                                                        <select class="form-control" id="bedrooms" th:field="*{pBedrooms}">
+                                                            <option value="0"></option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
                                                         </select>
-                                                        <label for="bedroom">How many Bedrooms ?</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <div class="form-floating">
-                                                        <select class="form-select" id="bathrooms" aria-label="Floating label select example" th:field="*{pBathrooms}">
-                                                            <option th:value="0" selected>Bathrooms</option>
-                                                            <option th:value="1" th:text="1"></option>
-                                                            <option th:value="2" th:text="2"></option>
-                                                            <option th:value="3" th:text="3"></option>
-                                                            <option th:value="4" th:text="4"></option>
-                                                            <option th:value="5" th:text="5"></option>
+                                                    <div class="form-group">
+                                                        <label for="bathrooms">How many bathrooms ?</label>
+                                                        <select class="form-control" id="bathrooms" th:field="*{pBathrooms}">
+                                                            <option value="0"></option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
                                                         </select>
-                                                        <label for="bathrooms">How many Bathrooms ?</label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <br>
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <div class="input-group mb-3">
-                                                        <label for="area" class="form-label">Area (Sqrt Feet): *</label>
-                                                        <input type="number" class="form-control" id="area" placeholder="ex: 2000" th:field="*{pArea}">
+                                                    <div class="form-group border-lable-flt">
+                                                        <input type="text" id="label-area" class="form-control" th:field="*{pArea}" placeholder=" ">
+                                                        <label class="lbl" for="label-area"><i class="fas fa-vector-square common"></i>Area (ft2): </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <div class="input-group mb-3">
-                                                        <label for="price" class="form-label">Price ($): *</label>
-                                                        <input type="number" class="form-control" id="price" placeholder="ex: 1992" th:field="*{pPrice}">
+                                                    <div class="form-group border-lable-flt">
+                                                        <input type="text" id="label-price" class="form-control" th:field="*{pPrice}" placeholder=" ">
+                                                        <label class="lbl" for="label-price"><i class="fas fa-dollar-sign common"></i>Price: </label>
                                                     </div>
+
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <div class="input-group mb-3">
-                                                        <label for="buityear" class="form-label">built's year: *</label>
-                                                        <input type="number" class="form-control" id="buityear" placeholder="ex: 1992" th:field="*{pBuiltYear}">
+                                                    <div class="form-group border-lable-flt">
+                                                        <input type="text" id="label-year" class="form-control" th:field="*{pBuiltYear}" placeholder="ex: 1992 ">
+                                                        <label class="lbl" for="label-year"><i class="fas fa-calendar-week common"></i>Build's year: </label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <h5>Choose more details</h5>
-                                                    <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-                                                        <input type="checkbox" class="btn-check" th:id="basement" autocomplete="off" >
-                                                        <label class="btn btn-outline-primary" th:for="basement">Has basement</label>
-
-                                                        <input type="checkbox" class="btn-check" th:id="terrasse" autocomplete="off" >
-                                                        <label class="btn btn-outline-primary" th:for="terrasse">Has a terrasse</label>
-
-                                                        <input type="checkbox" class="btn-check" th:id="pool" autocomplete="off">
-                                                        <label class="btn btn-outline-primary" th:for="pool">Has a swimming pool</label>
+                                                    <h4>Choose more details</h4><br>
+                                                    <div class="more-details">
+                                                        <div class="btn btn-outline-primary">
+                                                            <input id="hgarage" type="checkbox" th:field="*{hasGarage}"/>
+                                                            <label for="hgarage">Has a garage</label>
+                                                        </div>
+                                                        <div class="btn btn-outline-primary">
+                                                            <input id="basement" type="checkbox" th:field="*{hasBasement}"/>
+                                                            <label for="basement">Has a basement</label>
+                                                        </div>
+                                                        <div class="btn btn-outline-primary">
+                                                            <input id="terrasse" type="checkbox" th:field="*{hasTerrace}"/>
+                                                            <label for="terrasse">Has a terrasse</label>
+                                                        </div>
+                                                        <div class="btn btn-outline-primary">
+                                                            <input id="garden" type="checkbox" th:field="*{hasGarden}"/>
+                                                            <label for="garden">Has a garden</label>
+                                                        </div>
+                                                        <div class="btn btn-outline-primary">
+                                                            <input id="pool" type="checkbox" th:field="*{hasSPool}"/>
+                                                            <label for="pool">Has a swimming pool</label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -202,31 +229,13 @@
                                                 <h2 class="steps">Step 4 - 5</h2>
                                             </div>
                                         </div>
-                                        <!--<form th:action="@{/uploadFile}" method="post" enctype="multipart/form-data">-->
-                                            <label class="fieldlabels">Upload Your images:</label>
-                                            <input type="file" name="images" accept="image/*" onchange="loadFile(event)" >
-                                            <input type="hidden" name="pReference" th:field="*{pReference}" th:value="${pReference}">
-
-
-                                        <div class="images-list">
-                                            <div class="row row-cols-1 row-cols-md-3 g-4">
-                                                <div class="col">
-                                                    <div class="card" style="width: 18rem;">
-                                                        <img src="output" class="card-img-top" alt="test">
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="card" style="width: 18rem;">
-                                                        <img src="https://cdn0.iconfinder.com/data/icons/set-app-incredibles/24/Image-01-512.png" class="card-img-top" alt="test">
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="card" style="width: 18rem;">
-                                                        <img src="https://cdn0.iconfinder.com/data/icons/set-app-incredibles/24/Image-01-512.png" class="card-img-top" alt="test">
-                                                    </div>
-                                                </div>
-                                             </div>
+                                        <div class="images">
+                                            <div class="pic">
+                                                <i class="fa fa-upload"></i><br>
+                                                Click to upload
+                                            </div>
                                         </div>
+
                                     </div>
                                     <input type="submit" name="next" class="next action-button" value="Submit" />
                                     <input type="button" name="previous" class="previous action-button-previous" value="Previous" />

@@ -16,6 +16,7 @@ import java.util.List;
  */
 
 @Controller
+@SessionAttributes("refProperty")
 public class PropertyController {
 
     @Autowired
@@ -24,6 +25,11 @@ public class PropertyController {
     @ModelAttribute("property")
     public Property initProperty(){
         return new Property();
+    }
+
+    @ModelAttribute("refProperty")
+    public String initRef(){
+        return "";
     }
 
     @RequestMapping(value = "property/getallproperties", method = RequestMethod.GET)
@@ -41,9 +47,12 @@ public class PropertyController {
     }
 
     @RequestMapping(value = "property/newproperty", method = RequestMethod.POST)
-    public String saveProperty(@ModelAttribute("property") Property property, Model model){
+    public String saveProperty(@ModelAttribute("property") Property property,
+                               Model model){
+        String ref = (String) model.getAttribute("refProperty");
+        property.setPReference(ref);
         propertyService.createProperty(property);
-        return null;
+        return "redirect:/";
     }
 
     @RequestMapping(value = "property/{id}/updateproperty", method = RequestMethod.PUT)
