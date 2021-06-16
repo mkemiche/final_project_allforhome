@@ -1,9 +1,11 @@
 $(document).ready(function(){
+    verifyRadioIfChecked();
+    verifyCheckboxesIfChecked();
     manageStepTemplate();
     uploadImage();
 });
 
-function manageStepTemplate() {
+var manageStepTemplate = function() {
     var current_fs, next_fs, previous_fs; //fieldsets
     var opacity;
     var current = 1;
@@ -12,34 +14,40 @@ function manageStepTemplate() {
     setProgressBar(current);
 
     $(".next").click(function(){
+        if(failed){
+            verifyRadioIfChecked();
+            verifyCheckboxesIfChecked();
+            return false;
+        }
+        current_fs = $(this).parent();
+        next_fs = $(this).parent().next();
 
-    current_fs = $(this).parent();
-    next_fs = $(this).parent().next();
+        //Add Class Active
+        $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
 
-    //Add Class Active
-    $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+        //show the next fieldset
+        next_fs.show();
+        //hide the current fieldset with style
+        current_fs.animate({opacity: 0}, {
+            step: function(now) {
+            // for making fielset appear animation
+            opacity = 1 - now;
 
-    //show the next fieldset
-    next_fs.show();
-    //hide the current fieldset with style
-    current_fs.animate({opacity: 0}, {
-        step: function(now) {
-        // for making fielset appear animation
-        opacity = 1 - now;
-
-        current_fs.css({
-            'display': 'none',
-            'position': 'relative'
-        });
-        next_fs.css({'opacity': opacity});
+            current_fs.css({
+                'display': 'none',
+                'position': 'relative'
+             });
+             next_fs.css({'opacity': opacity});
         },
         duration: 500
     });
     setProgressBar(++current);
 });
+//}
 
 $(".previous").click(function(){
-
+    verifyRadioIfChecked();
+    verifyCheckboxesIfChecked();
     current_fs = $(this).parent();
     previous_fs = $(this).parent().prev();
 
@@ -98,22 +106,22 @@ $("#input-file").change(function(){
    *//**//* files.forEach(function(file){
         sendFile(file);
     })*//**//*
-});*//*
+});*/
 
-sendFile = function(file){
+sendFile = function(files){
     var formData = new FormData();
     var request = new XMLHttpRequest();
     var ref = $("#ref").text();
-    formData.set('file', file);
+    formData.set('files', files);
     formData.set('pReference', ref);
     request.open('POST', 'http://localhost:8080/uploadFile');
     request.send(formData);
-}*/
+}
 
 
 function uploadImage() {
       var button = $('.images .pic')
-      var uploader = $('<input type="file" accept="image/*" />')
+      var uploader = $('<input type="file" accept="image" />')
       var images = $('.images')
       var filesUploaded = [];
       button.on('click', function () {
@@ -144,3 +152,190 @@ function uploadImage() {
         imgs[i].id = i;
     }
  }
+
+
+
+
+
+var failed = false;
+$(".next:eq(0)").each(function(){
+    $(this).on('click', function(){
+        var isChecked = $('input[type*="radio"]').is(':checked');
+        var isTitleFilled = $('#label-title').val() === '';
+        var radioBtnList = $('.intro .btn');
+
+        $('#label-title').removeClass('is-invalid');
+        radioBtnList.removeClass('btn-outline-danger').addClass('btn-outline-warning');
+        failed = false;
+
+        if(!isChecked && isTitleFilled){
+            $('#label-title').addClass('is-invalid');
+            radioBtnList.removeClass('btn-outline-warning').addClass('btn-outline-danger');
+            failed = true;
+            return false;
+        }
+        if(!isChecked || isTitleFilled){
+            if(!isChecked){
+                radioBtnList.removeClass('btn-outline-warning').addClass('btn-outline-danger');
+            }
+            if(isTitleFilled){
+                $('#label-title').addClass('is-invalid');
+            }
+            failed = true;
+            return false;
+        }
+    })
+});
+
+$(".next:eq(1)").each(function(){
+    $(this).on('click', function(){
+        var status = $('#label-status option').filter(':selected').text() === '';
+        var type = $('#label-type').val() === '';
+        var description = $('#label-descrip').val() === '';
+
+        $('#label-status').removeClass('is-invalid');
+        $('#label-type').removeClass('is-invalid');
+        $('#label-descrip').removeClass('is-invalid');
+        failed = false;
+
+        if(status && type && description){
+           $('#label-status').addClass('is-invalid');
+           $('#label-type').addClass('is-invalid');
+           $('#label-descrip').addClass('is-invalid');
+           failed = true;
+           return false;
+        }
+        if(status || type || description){
+            if(status)
+                $('#label-status').addClass('is-invalid');
+            if(type)
+                $('#label-type').addClass('is-invalid');
+            if(description)
+                $('#label-descrip').addClass('is-invalid');
+
+            failed = true;
+            return false;
+        }
+
+
+    })
+});
+
+$(".next:eq(2)").each(function(){
+    $(this).on('click', function(){
+        var bedrooms = $('#bedrooms option').filter(':selected').text() === '';
+        var bathrooms = $('#bathrooms option').filter(':selected').text() === '';
+        var area = $('#label-area').val() === '';
+        var price = $('#label-price').val() === '';
+
+        $('#bedrooms').removeClass('is-invalid');
+        $('#bathrooms').removeClass('is-invalid');
+        $('#label-area').removeClass('is-invalid');
+        $('#label-price').removeClass('is-invalid');
+        failed = false;
+
+        if(bedrooms && bathrooms && area && price){
+            $('#bedrooms').addClass('is-invalid');
+            $('#bathrooms').addClass('is-invalid');
+            $('#label-area').addClass('is-invalid');
+            $('#label-price').addClass('is-invalid');
+            failed = true;
+            return false;
+        }
+        if(bedrooms || bathrooms || area || price){
+            if(bedrooms)
+                $('#bedrooms').addClass('is-invalid');
+            if(bathrooms)
+                $('#bathrooms').addClass('is-invalid');
+            if(area)
+                $('#label-area').addClass('is-invalid');
+            if(price)
+                $('#label-price').addClass('is-invalid');
+
+            failed = true;
+            return false;
+        }
+    })
+});
+
+$(".next:eq(3)").each(function(){
+    $(this).on('click', function(){
+        var address = $('#pLocation-adress').val() === '';
+        var city = $('#pLocation-city').val() === '';
+        var state = $('#pLocation-state').val() === '';
+        var zcode = $('#pLocation-zipcode').val() === '';
+
+        $('#pLocation-adress').removeClass('is-invalid');
+        $('#pLocation-city').removeClass('is-invalid');
+        $('#pLocation-state').removeClass('is-invalid');
+        $('#pLocation-zipcode').removeClass('is-invalid');
+        failed = false;
+
+        if(address && city && state && zcode){
+           $('#pLocation-adress').addClass('is-invalid');
+           $('#pLocation-city').addClass('is-invalid');
+           $('#pLocation-state').addClass('is-invalid');
+           $('#pLocation-zipcode').addClass('is-invalid');
+           failed = true;
+           return false;
+        }
+        if(address || city || state || zcode){
+            if(address)
+                $('#pLocation-adress').addClass('is-invalid');
+            if(city)
+                $('#pLocation-city').addClass('is-invalid');
+            if(state)
+                $('#pLocation-state').addClass('is-invalid');
+            if(zcode)
+                $('#pLocation-zipcode').addClass('is-invalid');
+            failed = true;
+            return false;
+        }
+    })
+});
+
+var verifyCheckboxesIfChecked = function(){
+    $('input[type*="checkbox"]').each(function(){
+        $(this).parent().removeClass('btn-warning').addClass('btn-outline-warning');
+        if($(this).is(':checked')){
+            $(this).parent().removeClass('btn-outline-warning').addClass('btn-warning');
+        }
+    });
+}
+
+
+$('input[type*="checkbox"]').each(function(){
+    $(this).on('click', function(){
+         if($(this).is(':checked')){
+            $(this).parent().removeClass('btn-outline-warning').addClass('btn-warning');
+         }else{
+            $(this).parent().removeClass('btn-warning').addClass('btn-outline-warning');
+         }
+
+    })
+});
+
+var verifyRadioIfChecked = function(){
+    $('input[type*="radio"]').each(function(){
+         if($(this).is(':checked')){
+            $(this).parent().parent().removeClass('btn-outline-warning').addClass('btn-warning');
+         }
+    });
+}
+
+var uncheckedAllRadios = function(){
+    $('input[type*="radio"]').each(function(){
+         $(this).parent().parent().removeClass('btn-outline-danger').removeClass('btn-warning').addClass('btn-outline-warning');
+    });
+}
+
+$('input[type*="radio"]').each(function(){
+    $(this).on('change', function(){
+    uncheckedAllRadios();
+     if($(this).is(':checked')){
+        $(this).parent().parent().removeClass('btn-outline-warning').removeClass('btn-outline-danger').addClass('btn-warning');
+     }
+
+    })
+});
+

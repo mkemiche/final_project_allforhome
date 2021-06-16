@@ -142,7 +142,6 @@ p {
 }
 
 #msform fieldset {
-    background: white;
     border: 0 none;
     border-radius: 0.5rem;
     box-sizing: border-box;
@@ -168,14 +167,10 @@ p {
 #msform textarea,
 #msform select{
     padding: 8px 15px 8px 15px;
-    border: 1px solid #000;
     border-radius: 5px;
-    margin-bottom: 25px;
     margin-top: 2px;
     width: 100%;
     box-sizing: border-box;
-    font-family: montserrat;
-    color: #2C3E50;
     font-size: 16px;
     letter-spacing: 1px
 }
@@ -229,7 +224,8 @@ p {
 .card {
     z-index: 0;
     border: none;
-    position: relative
+    position: relative;
+    background-color: #f8f9fa;
 }
 
 .fs-title {
@@ -271,7 +267,7 @@ p {
 #progressbar li {
     list-style-type: none;
     font-size: 15px;
-    width: 20%;
+    width: 16%;
     float: left;
     position: relative;
     font-weight: 400
@@ -279,17 +275,22 @@ p {
 
 #progressbar #category:before {
     font-family: FontAwesome;
-    content: "\f13e"
+    content: "\f015"
 }
 
 #progressbar #description:before {
     font-family: FontAwesome;
-    content: "\f007"
+    content: "\f055"
 }
 
 #progressbar #details:before {
     font-family: FontAwesome;
-    content: "\f007"
+    content: "\f05a"
+}
+
+#progressbar #location:before {
+    font-family: FontAwesome;
+    content: "\f3c5"
 }
 
 #progressbar #images:before {

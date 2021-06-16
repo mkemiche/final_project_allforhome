@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author mkemiche
@@ -24,9 +26,19 @@ public class User {
     @Column(columnDefinition = "int(11) UNSIGNED")
     private Long uId;
 
+    @NotNull
+    @NotBlank(message = "This field is required")
     private String uEmail;
+
+    @NotNull
+    @NotBlank(message = "This field is required")
     private String uPassword;
+
     private String uRoles;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "Registration_id")
+    private RegistrationDate pUpdateDate = new RegistrationDate();
 
     public User(String uEmail, String uPassword, String uRoles) {
         this.uEmail = uEmail;

@@ -25,4 +25,8 @@ public class Utils {
     public static String generatePropertyRef(){
         return String.format("REF%s", rend.nextInt(100000000));
     }
+
+    public static boolean checkPasswordConfirmation(String uPassword, String cPassword) {
+        return uPassword.hashCode() == cPassword.hashCode();
+    }
 }

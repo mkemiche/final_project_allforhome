@@ -22,21 +22,21 @@
                                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link btn btn-outline-primary" th:href="@{property/newproperty}"><i class="fas fa-clinic-medical common"></i>Post a property Ad</a>
+                                <a class="nav-link btn btn-outline-primary" th:href="@{../property/newproperty}"><i class="fas fa-clinic-medical common"></i>Post a property Ad</a>
                             </li>
                         </ul>
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="nav-link btn btn-outline-primary" th:href="@{user/login}"><i class="fas fa-sign-in-alt common"></i>Login</a>
+                                <a class="nav-link btn btn-outline-primary" th:href="@{../user/login}"><i class="fas fa-sign-in-alt common"></i>Login</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="signin" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="far fa-plus-square common"></i>Register
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="signin">
-                                    <a class="dropdown-item" th:href="@{user/register}"><i class="fas fa-user-plus common"></i>Register as user</a>
+                                    <a class="dropdown-item" th:href="@{../user/register}"><i class="fas fa-user-plus common"></i>Register as user</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="company/register"><i class="fas fa-business-time common"></i>Register as compagny</a>
+                                    <a class="dropdown-item" th:href="@{../company/register}"><i class="fas fa-business-time common"></i>Register as compagny</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">

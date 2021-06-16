@@ -6,6 +6,9 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * @author mkemiche
@@ -19,6 +22,9 @@ import javax.persistence.Entity;
 @SuperBuilder
 public class PrivateUser extends User {
 
+    @NotNull
+    @NotBlank(message = "This field is required")
+    @Size(min = 3, max = 30, message = "This field must be between 3 and 30 characters")
     private String username;
 
     public PrivateUser(String email, String password, String roles, String username) {

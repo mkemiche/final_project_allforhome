@@ -9,10 +9,7 @@
         <!-- Page content-->
         <div class="user-form">
             <div class="container">
-                <div class="col-md-6 mt-5">
-                   <!-- <i class="fa fa-users fa-10x"></i>-->
-                    <img src="https://themetrust.com/wp-content/uploads/2018/04/custom_login_cover.jpg" alt="logo login">
-                <!--    <h5 style="text-align:center">Login page</h5>-->
+                <div class="col-md-8 mt-5">
                     <div class="container">
                         <div class="errors">
                             <p class="error" th:if="${param.error}"> Login and password are incorrect</p>
@@ -25,9 +22,7 @@
                             <div class="form-group border-lable-flt">
                                 <input type="password" id="label-password" class="form-control" name="password" placeholder=" ">
                                 <label class="lbl" for="label-password"><i class="fas fa-unlock-alt common"></i>Password</label>
-                                <div class="btn-fp">
-                                    <a th:href="@{./reset}" > Forgot password ? </a>
-                                </div>
+                                <small id="passwordHelp" class="form-text text-muted"><a th:href="@{./reset}" > Forgot password ? </a></small>
 
                             </div>
 

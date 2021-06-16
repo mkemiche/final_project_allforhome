@@ -6,8 +6,10 @@ import io.allforhome.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -47,10 +49,15 @@ public class PropertyController {
     }
 
     @RequestMapping(value = "property/newproperty", method = RequestMethod.POST)
-    public String saveProperty(@ModelAttribute("property") Property property,
+    public String saveProperty(@ModelAttribute("property") @Valid Property property,
+                               BindingResult result,
                                Model model){
-        String ref = (String) model.getAttribute("refProperty");
-        property.setPReference(ref);
+
+        if(result.hasErrors()){
+            return "property/register_property";
+        }
+       // String ref = (String) model.getAttribute("refProperty");
+       // property.setPReference(ref);
         propertyService.createProperty(property);
         return "redirect:/";
     }
