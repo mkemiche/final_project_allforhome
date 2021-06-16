@@ -1,11 +1,12 @@
 package io.allforhome.services;
 
-import io.allforhome.enums.Role;
+import io.allforhome.models.RegistrationDate;
 import io.allforhome.models.User;
 import io.allforhome.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +23,7 @@ public class UserService {
     UserRepository userRepository;
 
     public void saveUser(User user){
-        user.setURoles(Role.ROLE_PRIVATE_USER.getRole());
+        user.setPUpdateDate(new RegistrationDate(LocalDateTime.now()));
         userRepository.save(user);
     }
 
@@ -33,8 +34,5 @@ public class UserService {
     public List<User> getAllUser(){
         return userRepository.findAll();
     }
-
-
-
 
 }

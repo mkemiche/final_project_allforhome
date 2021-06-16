@@ -6,6 +6,9 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * @author mkemiche
@@ -19,8 +22,18 @@ import javax.persistence.Entity;
 @DiscriminatorValue("agent")
 public class Agent extends User{
 
+    @NotNull
+    @NotEmpty(message = "This field is required")
     private String title;
+
+    @NotNull
+    @NotEmpty(message = "This field is required")
+    @Size(min = 3, max = 30, message = "This field must be between 3 and 30 characters")
     private String agentFirstName;
+
+    @NotNull
+    @NotEmpty(message = "This field is required")
+    @Size(min = 3, max = 30, message = "This field must be between 3 and 30 characters")
     private String agentLastName;
 
 

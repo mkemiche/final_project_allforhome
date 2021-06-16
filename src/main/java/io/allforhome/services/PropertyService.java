@@ -37,8 +37,8 @@ public class PropertyService {
             log.severe("Try to add property null");
             throw new ResourceNotFoundException();
         }
-        RegistrationDate rd = new RegistrationDate(LocalDateTime.now());
-        property.setPUpdateDate(rd);
+
+        property.setPUpdateDate(new RegistrationDate(LocalDateTime.now()));
         List<Image> images = imageUploadService.getAllImagesByRefProperty(property.getPReference());
         property.setPImages(images);
         propertyRepository.save(property);

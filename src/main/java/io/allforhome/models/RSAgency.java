@@ -5,6 +5,9 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -23,30 +26,36 @@ public class RSAgency {
     @Column(columnDefinition = "int(11) UNSIGNED")
     private Long id;
 
-    @Column(name = "company_number")
+    @NotNull
+    @NotBlank(message = "This field is required")
     private String companyNumber;
 
-    @Column(name = "company_name")
+    @NotNull
+    @NotBlank(message = "This field is required")
     private String companyName;
 
-    @Column(name = "company_phone")
+    @NotNull
+    @NotBlank(message = "This field is required")
     private String companyPhone;
+
+    @NotNull
+    @NotBlank(message = "This field is required")
+    private String companyEmail;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id")
+    @Valid
     private Location companyLocation;
 
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     List<Agent> agents;
 
-    public RSAgency(String companyNumber, String companyName, String companyPhone, Location companyLocation, List<Agent> agents) {
+    public RSAgency(String companyNumber, String companyName, String companyPhone, String companyEmail, Location companyLocation, List<Agent> agents) {
         this.companyNumber = companyNumber;
         this.companyName = companyName;
         this.companyPhone = companyPhone;
+        this.companyEmail = companyEmail;
         this.companyLocation = companyLocation;
         this.agents = agents;
     }

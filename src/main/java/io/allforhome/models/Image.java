@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author mkemiche
@@ -21,11 +23,12 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "int(11) UNSIGNED")
     private Long id;
+
+    @NotNull
+    @NotEmpty(message = "This field is required")
     private String imageName;
-    //private String uploadDir;
 
     public Image(String imageName ) {
         this.imageName = imageName;
-      //  this.uploadDir = uploadDir;
     }
 }

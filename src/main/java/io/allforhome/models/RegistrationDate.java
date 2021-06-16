@@ -21,6 +21,7 @@ public class RegistrationDate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "int(11) UNSIGNED")
     private Long id;
+
     private LocalDateTime updateDate;
 
     public RegistrationDate(LocalDateTime updateDate) {

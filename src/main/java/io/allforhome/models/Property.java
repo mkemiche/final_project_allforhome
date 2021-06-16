@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,20 +24,49 @@ public class Property {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "int(11) UNSIGNED")
     private Long id;
+
+    @NotNull
     private String pReference;
+
+    @NotNull
+    @NotBlank(message = "This field is required")
+    @Size(max = 100, min = 10, message = "This field must have between 10 and 100 characters.")
     private String pTitle;
 
-    @Column(length = 2000)
+    @NotNull
+    @NotBlank(message = "This field is required")
+    @Size(max = 2000)
     private String pDescription;
+
+    @NotNull
     private String pStatus;
+    @NotNull
     private String pCategory;
+
+    @NotNull
+    @NotBlank(message = "This field is required")
+    @Size(max = 15, min = 3, message = "This field must have between 3 and 15 characters.")
     private String pType;
+
+
+    @Size(min = 4, max = 4, message = "This field must have 4 character")
+    @Digits(integer = 4, fraction = 4)
     private String pBuiltYear;
 
-    private double pPrice;
-    private double pArea;
+    @NotNull
+    @NotBlank(message = "This field is required")
+    private String pPrice;
+
+    @NotNull
+    @NotBlank(message = "This field is required")
+    private String pArea;
+
+    @NotNull
     private int pBedrooms;
+
+    @NotNull
     private int pBathrooms;
+
     private boolean hasGarage;
     private boolean hasBasement;
     private boolean hasBalcony;
@@ -44,22 +74,19 @@ public class Property {
     private boolean hasSPool;
     private boolean hasGarden;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "Registration_id")
     private RegistrationDate pUpdateDate = new RegistrationDate();
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "location_id")
     private Location pLocation = new Location();
 
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     private List<Image> pImages = new ArrayList<>();
 
-    public Property(String pReference, String pTitle, String pDescription, String pStatus, String pCategory, String pType, String pBuiltYear, double pPrice, double pArea, int pBedrooms, int pBathrooms, boolean hasGarage, boolean hasBasement, boolean hasBalcony, boolean hasTerrace, boolean hasSPool, boolean hasGarden, RegistrationDate pUpdateDate, Location pLocation, List<Image> pImages) {
+    public Property(String pReference, String pTitle, String pDescription, String pStatus, String pCategory, String pType, String pBuiltYear, String pPrice, String pArea, int pBedrooms, int pBathrooms, boolean hasGarage, boolean hasBasement, boolean hasBalcony, boolean hasTerrace, boolean hasSPool, boolean hasGarden, RegistrationDate pUpdateDate, Location pLocation, List<Image> pImages) {
         this.pReference = pReference;
         this.pTitle = pTitle;
         this.pDescription = pDescription;
