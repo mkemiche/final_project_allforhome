@@ -5,8 +5,9 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-import java.util.ArrayList;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
@@ -25,12 +26,10 @@ public class Property {
     @Column(columnDefinition = "int(11) UNSIGNED")
     private Long id;
 
-    @NotNull
     private String pReference;
 
     @NotNull
     @NotBlank(message = "This field is required")
-    @Size(max = 100, min = 10, message = "This field must have between 10 and 100 characters.")
     private String pTitle;
 
     @NotNull
@@ -45,12 +44,9 @@ public class Property {
 
     @NotNull
     @NotBlank(message = "This field is required")
-    @Size(max = 15, min = 3, message = "This field must have between 3 and 15 characters.")
     private String pType;
 
 
-    @Size(min = 4, max = 4, message = "This field must have 4 character")
-    @Digits(integer = 4, fraction = 4)
     private String pBuiltYear;
 
     @NotNull
@@ -82,9 +78,9 @@ public class Property {
     @JoinColumn(name = "location_id")
     private Location pLocation = new Location();
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany
     @ToString.Exclude
-    private List<Image> pImages = new ArrayList<>();
+    private List<Image> pImages;
 
     public Property(String pReference, String pTitle, String pDescription, String pStatus, String pCategory, String pType, String pBuiltYear, String pPrice, String pArea, int pBedrooms, int pBathrooms, boolean hasGarage, boolean hasBasement, boolean hasBalcony, boolean hasTerrace, boolean hasSPool, boolean hasGarden, RegistrationDate pUpdateDate, Location pLocation, List<Image> pImages) {
         this.pReference = pReference;

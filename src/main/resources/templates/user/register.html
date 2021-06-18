@@ -12,38 +12,36 @@
                 <div class="col-md-8 mt-5">
                     <form th:action="@{./register}" method="post" th:object="${privateuser}">
                         <div class="form-group border-lable-flt">
-<!--                            <small id="username" class="form-text text-danger">required</small>-->
                             <input th:class="${#fields.hasErrors('username')}? 'form-control is-invalid':form-control" type="text" id="label-username" th:field="*{username}" placeholder=" ">
                             <label class="lbl" for="label-username"><i class="fas fa-user-tie common"></i>Username</label>
+                            <small id="username" class="form-text text-danger">required</small>
                             <div class="invalid-feedback">
                                 <p class="error" th:each="error : ${#fields.errors('username')}" th:text="${error}"></p>
                             </div>
                         </div>
                         <div class="form-group border-lable-flt">
-<!--                            <small id="email" class="form-text text-danger">required</small>-->
                             <input th:class="${#fields.hasErrors('uEmail')}? 'form-control is-invalid':form-control" type="text" id="label-email" th:field="*{uEmail}" placeholder=" ">
                             <label class="lbl" for="label-email"> <i class="fas fa-envelope-open-text common"></i>Email</label>
+                            <small id="email" class="form-text text-danger">required</small>
                             <div class="invalid-feedback">
                                 <p class="error" th:each="error : ${#fields.errors('uEmail')}" th:text="${error}"></p>
                             </div>
                         </div>
 
                         <div class="form-group border-lable-flt">
-<!--                            <small id="password" class="form-text text-danger">required</small>-->
                             <input th:class="${#fields.hasErrors('uPassword')}? 'form-control is-invalid':form-control" type="password" id="label-password" th:field="*{uPassword}" placeholder=" ">
                             <label class="lbl" for="label-password"><i class="fas fa-unlock-alt common"></i>Password</label>
+                            <small id="password" class="form-text text-danger">required</small>
                             <div class="invalid-feedback">
                                 <p class="error" th:each="error : ${#fields.errors('uPassword')}" th:text="${error}"></p>
                             </div>
                         </div>
 
                         <div class="form-group border-lable-flt">
-<!--                            <small id="cpassword" class="form-text text-danger">required</small>-->
                             <input th:class="${emptyPassword} != '' or  ${invalidConfirmation} != '' ? 'form-control is-invalid':form-control" type="password" id="label-cpassword" placeholder=" " name="cpassword">
                             <label class="lbl" for="label-cpassword"><i class="fas fa-unlock common"></i>Confirm password</label>
-
+                            <small id="cpassword" class="form-text text-danger">required</small>
                             <div class="invalid-feedback">
-<!--                                Password's Confimation failed. Please try again-->
                                 <p class="error" th:text="${emptyPassword}"></p>
                                 <p class="error" th:text="${invalidConfirmation}"></p>
                             </div>

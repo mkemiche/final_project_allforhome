@@ -9,6 +9,7 @@ import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -27,8 +28,11 @@ public class PropertyService {
     @Autowired
     private PropertyRepository propertyRepository;
 
+    private static final SimpleDateFormat DATE_FORMATER = new SimpleDateFormat("mm/dd/yyy HH:mm");
+
     public List<Property> getAllProperties(){
-        return propertyRepository.findAll();
+        List<Property> properties = propertyRepository.findAll();
+        return properties;
     }
 
 

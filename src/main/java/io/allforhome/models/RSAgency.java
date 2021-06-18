@@ -34,12 +34,8 @@ public class RSAgency {
     @NotBlank(message = "This field is required")
     private String companyName;
 
-    @NotNull
-    @NotBlank(message = "This field is required")
     private String companyPhone;
 
-    @NotNull
-    @NotBlank(message = "This field is required")
     private String companyEmail;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
