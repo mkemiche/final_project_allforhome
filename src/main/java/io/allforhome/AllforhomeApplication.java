@@ -1,22 +1,14 @@
 package io.allforhome;
 
-import io.allforhome.enums.Category;
-import io.allforhome.enums.Role;
-import io.allforhome.enums.Status;
-import io.allforhome.enums.Title;
-import io.allforhome.models.*;
 import io.allforhome.repositories.ImageUploadRepository;
+import io.allforhome.repositories.PropertyRepository;
 import io.allforhome.services.CompanyService;
 import io.allforhome.services.PropertyService;
 import io.allforhome.services.UserService;
-import io.allforhome.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 @SpringBootApplication
 public class AllforhomeApplication implements CommandLineRunner {
@@ -35,12 +27,15 @@ public class AllforhomeApplication implements CommandLineRunner {
 	ImageUploadRepository imageUploadRepository;
 
 	@Autowired
+	PropertyRepository propertyRepository;
+
+	@Autowired
 	PropertyService propertyService;
 
 	@Override
 	public void run(String... args) throws Exception {
 
-		Location loc = new Location("123 address","Columbus","43001","OH");
+		/*Location loc = new Location("123 address","Columbus","43001","OH");
 		Location loc2 = new Location("6553 Street One","Pittsburg","42001","PA");
 		Location loc3 = new Location("7762 street two","New Albany","43320","OH");
 
@@ -78,30 +73,76 @@ public class AllforhomeApplication implements CommandLineRunner {
 		userService.saveUser(agent5);
 		userService.saveUser(agent5);
 
-		Image image = new Image("PJ_REF08872663_6_0.jpg");
-		Image image2 = new Image("PJ_REF08872663_6_1.jpg");
-		Image image3 = new Image("PJ_REF08872663_6_2.jpg");
-		Image image4 = new Image("PJ_REF08872663_6_3.jpg");
+		Image image = new Image("PJ_REF18153308_0.jpg");
+		Image image2 = new Image("PJ_REF18153308_1.jpg");
+		Image image3 = new Image("PJ_REF18153308_2.jpg");
+		Image image4 = new Image("PJ_REF18153308_3.jpg");
+		Image image5 = new Image("PJ_REF32586960_0.jpg");
+		Image image6 = new Image("PJ_REF32586960_1.jpg");
+		Image image7 = new Image("PJ_REF32586960_2.jpg");
 
 		imageUploadRepository.save(image);
 		imageUploadRepository.save(image2);
 		imageUploadRepository.save(image3);
 		imageUploadRepository.save(image4);
+		imageUploadRepository.save(image5);
+		imageUploadRepository.save(image6);
+		imageUploadRepository.save(image7);
 
 
-		for (int i = 0; i < 20; i++) {
-			var property = new Property(Utils.generatePropertyRef(),
+
+			var property1 = new Property(Utils.generatePropertyRef(),
 					"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
 					"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-					Status.RENT.getValue(), Category.HOUSE.getCategory(), "no type", "1993", "152000", "2000", 3, 4, true, true, true, false, true, false,
+					Status.RENT.getValue(), Category.HOUSE.getCategory(), "no type", "1993", "152000", "2000", 3, 4, true, true, true, false, false, true,
 					new RegistrationDate(LocalDateTime.now()),
-					new Location("123 main street","columbus","43229","OH"), List.of(image, image3, image4));
-
-			propertyService.createProperty(property);
-
-		}
+					new Location("123 main street","columbus","43229","OH"), List.of(image));
 
 
+		var property2 = new Property(Utils.generatePropertyRef(),
+				"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+				"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+				Status.RENT.getValue(), Category.HOUSE.getCategory(), "no type", "1993", "152000", "2000", 3, 4, true, true, true, false, true, false,
+				new RegistrationDate(LocalDateTime.now()),
+				new Location("123 main street","columbus","43229","OH"), List.of(image7));
+		var property3 = new Property(Utils.generatePropertyRef(),
+				"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+				"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+				Status.RENT.getValue(), Category.HOUSE.getCategory(), "no type", "1993", "152000", "2000", 3, 4, true, true, false, false, false, false,
+				new RegistrationDate(LocalDateTime.now()),
+				new Location("123 main street","columbus","43229","OH"), List.of(image2));
+		var property4 = new Property(Utils.generatePropertyRef(),
+				"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+				"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+				Status.RENT.getValue(), Category.HOUSE.getCategory(), "no type", "1993", "152000", "2000", 3, 4, true, false, true, false, false, true,
+				new RegistrationDate(LocalDateTime.now()),
+				new Location("123 main street","columbus","43229","OH"), List.of(image3));
+		var property5 = new Property(Utils.generatePropertyRef(),
+				"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+				"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+				Status.RENT.getValue(), Category.HOUSE.getCategory(), "no type", "1993", "152000", "2000", 3, 4, true, true, true, true, true, true,
+				new RegistrationDate(LocalDateTime.now()),
+				new Location("123 main street","columbus","43229","OH"), List.of(image4));
+		var property6 = new Property(Utils.generatePropertyRef(),
+				"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+				"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+				Status.RENT.getValue(), Category.HOUSE.getCategory(), "no type", "1993", "152000", "2000", 3, 4, true, true, true, false, false, true,
+				new RegistrationDate(LocalDateTime.now()),
+				new Location("123 main street","columbus","43229","OH"), List.of(image5));
+		var property7 = new Property(Utils.generatePropertyRef(),
+				"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+				"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+				Status.RENT.getValue(), Category.HOUSE.getCategory(), "no type", "1993", "152000", "2000", 3, 4, true, true, false, false, false, false,
+				new RegistrationDate(LocalDateTime.now()),
+				new Location("123 main street","columbus","43229","OH"), List.of(image6));
 
+
+		propertyRepository.save(property1);
+		propertyRepository.save(property2);
+		propertyRepository.save(property3);
+		propertyRepository.save(property4);
+		propertyRepository.save(property5);
+		propertyRepository.save(property6);
+		propertyRepository.save(property7);*/
 	}
 }

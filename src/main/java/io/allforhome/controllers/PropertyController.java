@@ -8,9 +8,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author mkemiche
@@ -56,8 +60,8 @@ public class PropertyController {
         if(result.hasErrors()){
             return "property/register_property";
         }
-       // String ref = (String) model.getAttribute("refProperty");
-       // property.setPReference(ref);
+        String ref = (String) model.getAttribute("refProperty");
+        property.setPReference(ref);
         propertyService.createProperty(property);
         return "redirect:/";
     }
@@ -74,6 +78,17 @@ public class PropertyController {
         propertyService.removeProperty(id);
 
         return null;
+    }
+
+
+    @RequestMapping(value = "/getlastaddedproperty", method = RequestMethod.GET)
+    public String getLastAddedProperty(Model model, RedirectAttributes redirectAttributes){
+        List<Property> properties = propertyService.getAllProperties().stream().sorted(Comparator.comparing(Property::getId).reversed()).collect(Collectors.toList());
+        String path = File.separator+"fileupload" + File.separator;
+        model.addAttribute("properties", properties);
+        model.addAttribute("path", path);
+
+        return "property/property_list";
     }
 
 

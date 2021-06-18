@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    formatDate();
     verifyRadioIfChecked();
     verifyCheckboxesIfChecked();
     manageStepTemplate();
@@ -108,12 +109,12 @@ $("#input-file").change(function(){
     })*//**//*
 });*/
 
-sendFile = function(files){
+sendFile = function(file){
     var formData = new FormData();
     var request = new XMLHttpRequest();
-    var ref = $("#ref").text();
-    formData.set('files', files);
-    formData.set('pReference', ref);
+    var ref = $("#label-ref").val();
+    formData.set('file', file);
+    formData.set('ref', ref);
     request.open('POST', 'http://localhost:8080/uploadFile');
     request.send(formData);
 }
@@ -121,7 +122,7 @@ sendFile = function(files){
 
 function uploadImage() {
       var button = $('.images .pic')
-      var uploader = $('<input type="file" accept="image" />')
+      var uploader = $('<input type="file" enctype="multipart/form-data"/>')
       var images = $('.images')
       var filesUploaded = [];
       button.on('click', function () {
@@ -135,7 +136,7 @@ function uploadImage() {
             images.prepend('<div id="'+filesUploaded.length+'" class="img" style="background-image: url(\'' + event.target.result + '\');" rel="'+ event.target.result  +'"><span>remove</span></div>')
           }
           reader.readAsDataURL(uploader[0].files[0])
-
+          sendFile(uploader[0].files[0]);
        })
 
       images.on('click', '.img', function () {
@@ -338,4 +339,16 @@ $('input[type*="radio"]').each(function(){
 
     })
 });
+
+var formatDate = function(){
+    var date = new Date($('#registration-date').text());
+    var options = {
+            day: 'numeric',
+            year: 'numeric',
+            month: 'long',
+            hour: 'numeric',
+            minute: 'numeric'
+    }
+    $('#registration-date').text(date.toLocaleString('en-US', options));
+}
 

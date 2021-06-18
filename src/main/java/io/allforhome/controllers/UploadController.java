@@ -30,11 +30,11 @@ public class UploadController {
 
 
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-    public String uploadFile(@ModelAttribute("files") MultipartFile[] files,
-                             @RequestParam("pReference") String ref,
+    public String uploadFile(@ModelAttribute("file") MultipartFile file,
+                             @RequestParam("ref") String ref,
                              RedirectAttributes redirectAttributes) {
 
-        imageUploadService.saveImage(files, ref);
+        imageUploadService.saveImage(file, ref);
 
        // List<String> filesUploaded = imageUploadService.getAllImagesByRefProperty(ref).stream().map(i-> "fileupload" + File.separator + i.getImageName()).collect(Collectors.toList());
         //redirectAttributes.addFlashAttribute("message", "You successfully uploaded " + filename);

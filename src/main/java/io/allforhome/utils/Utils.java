@@ -19,7 +19,7 @@ public class Utils {
     private static AtomicInteger counter = new AtomicInteger(0);
 
     public static String generateImageName(String pRef, String fileExtension){
-        return String.format("PJ_%s_%d%s", pRef, counter.getAndIncrement(), fileExtension);
+        return String.format("PJ%s%d%s", pRef, counter.getAndIncrement(), fileExtension);
     }
 
     public static String generatePropertyRef(){

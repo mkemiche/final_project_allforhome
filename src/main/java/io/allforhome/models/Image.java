@@ -20,7 +20,7 @@ import javax.validation.constraints.NotNull;
 public class Image {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(columnDefinition = "int(11) UNSIGNED")
     private Long id;
 
