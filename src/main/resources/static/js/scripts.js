@@ -4,6 +4,7 @@ $(document).ready(function(){
     verifyCheckboxesIfChecked();
     manageStepTemplate();
     uploadImage();
+    searchBar();
 });
 
 var manageStepTemplate = function() {
@@ -352,3 +353,22 @@ var formatDate = function(){
     $('#registration-date').text(date.toLocaleString('en-US', options));
 }
 
+var searchBar = function() {
+
+
+}
+
+$(".search-form .dropdown").on('click', function(){
+        $(".search-form .dropdown-list ul").toggle();
+    });
+
+    $(".search-form .dropdown-list ul li").on('click', function(){
+        var icon_text = $(this).html();
+        $(".search-form .default-option").html(icon_text);
+    });
+
+    $(document).on('click', function(event){
+        if(!$(event.target).closest(".search-form .dropdown").length){
+            $(".search-form .dropdown-list ul").hide();
+        }
+    })

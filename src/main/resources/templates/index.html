@@ -9,7 +9,40 @@
         <!-- Page content-->
 <div class="row">
     <div class="col-md-12">
+        <div class="jumbotron">
+            <h1 class="display-4">Hello, world!</h1>
+            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+            <hr class="my-4">
+            <div class="container search-form">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="dropdown">
+                                <div class="default-option">Category</div>
+                                <div class="dropdown-list">
+                                    <ul>
+                                        <li>Home</li>
+                                        <li>Apartment</li>
+                                        <li>Garage</li>
+                                        <li>Other</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="search">
+                                <input type="text" class="search-input" placeholder="Where ?">
+                            </div>
+                            <button class="btn btn-search" type="submit"><i class="fas fa-search"></i></button>
+                            <button class="btn btn-filter" type="submit"><i class="fas fa-filter"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
 
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
         <div th:replace="fragments/footer :: myFooter"></div>
