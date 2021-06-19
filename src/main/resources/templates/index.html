@@ -14,33 +14,100 @@
             <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
             <hr class="my-4">
             <div class="container search-form">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <div class="dropdown">
-                                <div class="default-option">Category</div>
-                                <div class="dropdown-list">
-                                    <ul>
-                                        <li>Home</li>
-                                        <li>Apartment</li>
-                                        <li>Garage</li>
-                                        <li>Other</li>
-                                    </ul>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <div class="dropdown">
+                                        <div class="default-option">Category</div>
+                                        <div class="dropdown-list">
+                                            <ul>
+                                                <li>Home</li>
+                                                <li>Apartment</li>
+                                                <li>Garage</li>
+                                                <li>Other</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="search">
+                                        <input type="text" class="search-input" placeholder="Where ?">
+                                    </div>
+                                    <button class="btn btn-search" type="submit"><i class="fas fa-search"></i></button>
+                                    <button class="btn btn-filter" type="submit"><i class="fas fa-filter"></i></button>
                                 </div>
                             </div>
-                            <div class="search">
-                                <input type="text" class="search-input" placeholder="Where ?">
-                            </div>
-                            <button class="btn btn-search" type="submit"><i class="fas fa-search"></i></button>
-                            <button class="btn btn-filter" type="submit"><i class="fas fa-filter"></i></button>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-
+            </div>
+            <div class="container filter">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="dropdown">
+                                            <div class="default-option">By status</div>
+                                            <div class="dropdown-list">
+                                                <ul id="status">
+                                                    <li>Home</li>
+                                                    <li>Apartment</li>
+                                                    <li>Garage</li>
+                                                    <li>Other</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="dropdown">
+                                            <div class="default-option">Bedroom</div>
+                                            <div class="dropdown-list">
+                                                <ul class="bedroom" id="horizontal-list">
+                                                    <label>By Bedroom</label><br>
+                                                    <li><input type="radio" id="bed-1" name="bedroom" value="1" />
+                                                        <label for="bed-1">1</label></li>
+                                                    <li><input type="radio" id="bed-2" name="bedroom" value="2" />
+                                                         <label for="bed-2">2</label></li>
+                                                    <li><input type="radio" id="bed-3" name="bedroom" value="3" />
+                                                            <label for="bed-3">3</label></li>
+                                                    <li><input type="radio" id="bed-4" name="bedroom" value="4" />
+                                                        <label for="bed-4">4</label></li>
+                                                    <li><input type="radio" id="bed-5" name="bedroom" value="5" />
+                                                        <label for="bed-5">5</label>
+                                                    </li>
+                                                    <br>
+                                                    <label>By Bedroom</label><br>
+                                                    <li><input type="radio" id="bath-1" name="bathroom" value="1" />
+                                                        <label for="bath-1">1</label></li>
+                                                    <li><input type="radio" id="bath-2" name="bathroom" value="2" />
+                                                        <label for="bath-2">2</label></li>
+                                                    <li><input type="radio" id="bath-3" name="bathroom" value="3" />
+                                                        <label for="bath-3">3</label></li>
+                                                    <li><input type="radio" id="bath-4" name="bathroom" value="4" />
+                                                        <label for="bath-4">4</label></li>
+                                                    <li><input type="radio" id="bath-5" name="bathroom" value="5" />
+                                                        <label for="bath-5">5</label>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="dropdown">
+                                            <div class="default-option">Bathroom</div>
+                                            <div class="dropdown-list">
+                                                <ul id="bathroom">
+                                                    <li>Home</li>
+                                                    <li>Apartment</li>
+                                                    <li>Garage</li>
+                                                    <li>Other</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
             </div>
         </div>
     </div>
