@@ -38,6 +38,22 @@ public class PropertyController {
         return "";
     }
 
+    @ModelAttribute("category")
+    public String initCat(){
+        return "";
+    }
+
+    @ModelAttribute("location")
+    public String initLoc(){
+        return "";
+    }
+
+    @ModelAttribute("keyword")
+    public String initKeyword(){
+        return "";
+    }
+
+
     @RequestMapping(value = "property/getallproperties", method = RequestMethod.GET)
     public String getAllProperties(Model model){
         List<Property> properties = propertyService.getAllProperties();
@@ -97,5 +113,16 @@ public class PropertyController {
         model.addAttribute("property", propery);
         return "property/property_details";
     }
+
+    @RequestMapping(value = "search?category={category}&location={location}&keyword={keyword}", method = RequestMethod.POST)
+    public String searchProperties(@PathVariable("category") String category,
+                                   @PathVariable("location") String location,
+                                   @PathVariable("keyword") String keyword,
+                                   Model model){
+
+        System.out.println(category+" "+location+"  "+keyword);
+        return "";
+    }
+
 
 }
