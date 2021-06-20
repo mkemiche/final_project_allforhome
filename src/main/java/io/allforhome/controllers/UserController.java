@@ -9,13 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author mkemiche
@@ -59,6 +57,7 @@ public class UserController {
     public String initUsername(){
         return "";
     }
+
     @ModelAttribute("email")
     public String initEmail(){
         return "";
@@ -76,6 +75,11 @@ public class UserController {
 
     @ModelAttribute("emptyPassword")
     public String initemptyPassword(){
+        return "";
+    }
+
+    @ModelAttribute("emptycPassword")
+    public String initemptycPassword(){
         return "";
     }
 
@@ -99,6 +103,20 @@ public class UserController {
     @RequestMapping(value = "user/reset", method = RequestMethod.POST)
     public String resetPassword(@RequestParam("email") @Valid String email){
         System.out.println("email  " + email);
+        return "user/reset_password";
+    }
+
+    @RequestMapping(value = "user/resetuserpassword", method = RequestMethod.POST)
+    public String userConnectedResetPassword(@RequestParam("password") @Valid String password,
+                                             @RequestParam("cpassword") String cPassword, Model model){
+
+
+        boolean isValid = userService.checkValidatePassword(password, cPassword, model);
+
+        if(!isValid){
+            return "user/register";
+        }
+        System.out.println("email  " + password);
         return "user/reset_password";
     }
 
@@ -178,6 +196,24 @@ public class UserController {
         agency.setAgents(List.of(agent));
         companyService.saveCompany(agency);
         return "redirect:/";
+    }
+
+    @RequestMapping(value = "user/{id}", method = RequestMethod.GET)
+    public String getPropertyById(@PathVariable("id") Long id, Model model){
+        Optional<User> user = userService.getUserById(id);
+        if(user.isEmpty()){
+            System.out.println("user not found");
+        }
+        if(user.get().getURoles().contains(Role.ROLE_PRIVATE_USER.getRole())){
+            PrivateUser privateUser = (PrivateUser) user.get();
+            model.addAttribute("privateUser", privateUser);
+            model.addAttribute("username", privateUser.getUsername());
+            return "user/user_view";
+        }
+
+        Agent agent = (Agent) user.get();
+        model.addAttribute("agent", agent);
+        return "user/agent_view";
     }
 
 
