@@ -4,6 +4,7 @@ $(document).ready(function(){
     verifyCheckboxesIfChecked();
     manageStepTemplate();
     uploadImage();
+    formatCurrency();
 });
 
 var manageStepTemplate = function() {
@@ -341,7 +342,6 @@ $('input[type*="radio"]').each(function(){
 });
 
 var formatDate = function(){
-    var date = new Date($('#registration-date').text());
     var options = {
             day: 'numeric',
             year: 'numeric',
@@ -349,6 +349,50 @@ var formatDate = function(){
             hour: 'numeric',
             minute: 'numeric'
     }
-    $('#registration-date').text(date.toLocaleString('en-US', options));
+    $('.registration-date').each(function() {
+        var text = $(this).text();
+        var date = new Date(text);
+        $(this).text(date.toLocaleString('en-US', options))
+
+    });
 }
 
+var formatCurrency = function() {
+    var options = {
+          style: 'currency',
+          currency: 'USD',
+        }
+    $('.price').each(function() {
+        var price = parseInt($(this).text());
+        $(this).text(price.toLocaleString('en-US', options));
+    });
+}
+
+//images gallery animation
+const imgs = document.querySelectorAll('.img-select a');
+const imgBtns = [...imgs];
+let imgId = 1;
+
+imgBtns.forEach((imgItem) => {
+    imgItem.addEventListener('click', (event) => {
+        event.preventDefault();
+        imgId = imgItem.dataset.id;
+        slideImage();
+    });
+});
+
+function slideImage(){
+    const displayWidth = document.querySelector('.img-showcase img:first-child').clientWidth;
+
+    document.querySelector('.img-showcase').style.transform = `translateX(${- (imgId - 1) * displayWidth}px)`;
+}
+
+window.addEventListener('resize', slideImage);
+
+//reset password block display
+/*var displayResetPasswordBlock = function() {
+    $('.container.reset-block').hide();
+    $('#btn-reset-pass').on('click', function(){
+        $('.container.reset-block').toggle();
+    })
+}*/

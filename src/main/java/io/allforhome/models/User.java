@@ -38,7 +38,7 @@ public class User {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "Registration_id")
-    private RegistrationDate pUpdateDate = new RegistrationDate();
+    private RegistrationDate registration = new RegistrationDate();
 
     public User(String uEmail, String uPassword, String uRoles) {
         this.uEmail = uEmail;
