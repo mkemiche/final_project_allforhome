@@ -4,6 +4,7 @@ $(document).ready(function(){
     verifyCheckboxesIfChecked();
     manageStepTemplate();
     uploadImage();
+    searchBar();
     formatCurrency();
 });
 
@@ -387,6 +388,20 @@ function slideImage(){
     document.querySelector('.img-showcase').style.transform = `translateX(${- (imgId - 1) * displayWidth}px)`;
 }
 
+$(".search-form .dropdown").on('click', function(){
+        $(".search-form .dropdown-list ul").toggle();
+    });
+
+    $(".search-form .dropdown-list ul li").on('click', function(){
+        var icon_text = $(this).html();
+        $(".search-form .default-option").html(icon_text);
+    });
+
+    $(document).on('click', function(event){
+        if(!$(event.target).closest(".search-form .dropdown").length){
+            $(".search-form .dropdown-list ul").hide();
+        }
+    })
 window.addEventListener('resize', slideImage);
 
 //reset password block display
@@ -396,3 +411,4 @@ window.addEventListener('resize', slideImage);
         $('.container.reset-block').toggle();
     })
 }*/
+
