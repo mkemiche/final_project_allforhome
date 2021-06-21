@@ -1,8 +1,11 @@
 package io.allforhome.controllers;
 
 import io.allforhome.enums.Status;
+import io.allforhome.exceptions.UserNotFoundException;
 import io.allforhome.models.Property;
+import io.allforhome.models.User;
 import io.allforhome.services.PropertyService;
+import io.allforhome.services.UserService;
 import io.allforhome.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +18,7 @@ import javax.validation.Valid;
 import java.io.File;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -29,6 +33,9 @@ public class PropertyController {
     @Autowired
     private PropertyService propertyService;
 
+    @Autowired
+    private UserService userService;
+
     @ModelAttribute("property")
     public Property initProperty(){
         return new Property();
@@ -36,6 +43,11 @@ public class PropertyController {
 
     @ModelAttribute("refProperty")
     public String initRef(){
+        return "";
+    }
+
+    @ModelAttribute("email")
+    public String initEmail(){
         return "";
     }
 
@@ -55,14 +67,20 @@ public class PropertyController {
 
     @RequestMapping(value = "property/newproperty", method = RequestMethod.POST)
     public String saveProperty(@ModelAttribute("property") @Valid Property property,
+                               @RequestParam("email") String email,
                                BindingResult result,
                                Model model){
 
         if(result.hasErrors()){
             return "property/register_property";
         }
+        Optional<User> user = userService.findUserByEmail(email);
+        if(user.isEmpty()){
+            throw new UserNotFoundException(String.format("User email: %s doesn't exists", email));
+        }
         String ref = (String) model.getAttribute("refProperty");
         property.setPReference(ref);
+        property.setUser(user.get());
         propertyService.createProperty(property);
         return "redirect:/";
     }
@@ -117,8 +135,9 @@ public class PropertyController {
 
     @RequestMapping(value = "property/{id}", method = RequestMethod.GET)
     public String getPropertyById(@PathVariable("id") Long id, Model model){
-        Property propery = propertyService.findPropertyById(id);
-        model.addAttribute("property", propery);
+        Property property = propertyService.findPropertyById(id);
+        model.addAttribute("property", property);
+        model.addAttribute("user_id", property.getUser().getUId());
         return "property/property_details";
     }
 

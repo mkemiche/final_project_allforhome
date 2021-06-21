@@ -341,7 +341,7 @@ small{
 
 .card-wrapper .img-item img {
     height: 83px;
-    width: 25%;
+    /*width: 25%;*/
 }
 .card-wrapper .img-item:nth-child(1),
 .card-wrapper .img-item:nth-child(2),

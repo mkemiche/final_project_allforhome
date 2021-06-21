@@ -83,7 +83,11 @@ public class Property {
     @ToString.Exclude
     private List<Image> pImages = new ArrayList<>();
 
-    public Property(String pReference, String pTitle, String pDescription, String pStatus, String pCategory, String pType, String pBuiltYear, String pPrice, String pArea, int pBedrooms, int pBathrooms, boolean hasGarage, boolean hasBasement, boolean hasBalcony, boolean hasTerrace, boolean hasSPool, boolean hasGarden, RegistrationDate pUpdateDate, Location pLocation, List<Image> pImages) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public Property(String pReference, String pTitle, String pDescription, String pStatus, String pCategory, String pType, String pBuiltYear, String pPrice, String pArea, int pBedrooms, int pBathrooms, boolean hasGarage, boolean hasBasement, boolean hasBalcony, boolean hasTerrace, boolean hasSPool, boolean hasGarden, RegistrationDate pUpdateDate, Location pLocation, List<Image> pImages, User user) {
         this.pReference = pReference;
         this.pTitle = pTitle;
         this.pDescription = pDescription;
@@ -104,5 +108,6 @@ public class Property {
         this.pUpdateDate = pUpdateDate;
         this.pLocation = pLocation;
         this.pImages = pImages;
+        this.user = user;
     }
 }

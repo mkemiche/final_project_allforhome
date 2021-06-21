@@ -5,6 +5,7 @@ import io.allforhome.exceptions.UserAlreadyExistsException;
 import io.allforhome.exceptions.UserNotFoundException;
 import io.allforhome.models.*;
 import io.allforhome.services.CompanyService;
+import io.allforhome.services.PropertyService;
 import io.allforhome.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,11 +29,13 @@ public class UserController {
 
     private UserService userService;
     private CompanyService companyService;
+    private PropertyService propertyService;
 
     @Autowired
-    public UserController(UserService userService, CompanyService companyService) {
+    public UserController(UserService userService, CompanyService companyService, PropertyService propertyService) {
         this.userService = userService;
         this.companyService = companyService;
+        this.propertyService = propertyService;
     }
 
     @ModelAttribute("agent")
@@ -169,17 +172,22 @@ public class UserController {
     public String getPropertyById(@PathVariable("id") Long id, Model model){
         Optional<User> user = userService.getUserById(id);
         if(user.isEmpty()){
-            throw new UserNotFoundException(String.format("User id: %d doesn't exists"));
+            throw new UserNotFoundException(String.format("User id: %d doesn't exists", id));
         }
+
+        List<Property> properties = propertyService.findAllPropertiesByUser(user.get().getUId());
+
         if(user.get().getURoles().contains(Role.ROLE_PRIVATE_USER.getRole())){
             PrivateUser privateUser = (PrivateUser) user.get();
             model.addAttribute("privateUser", privateUser);
             model.addAttribute("username", privateUser.getUsername());
+            model.addAttribute("properties", properties);
             return "user/user_view";
         }
 
         Agent agent = (Agent) user.get();
         model.addAttribute("agent", agent);
+        model.addAttribute("properties", properties);
         return "user/agent_view";
     }
 

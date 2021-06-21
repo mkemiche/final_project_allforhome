@@ -53,6 +53,7 @@
                                                     </div>
                                                     <div class="col-md-2">
                                                         <div class="form-group border-lable-flt">
+                                                            <input type="hidden" id="user" name="email" th:value="${#authentication.getName()}">
                                                             <input type="text" id="label-ref" class="form-control" name="pReference" th:value="${refProperty}" disabled>
                                                             <label class="lbl" for="label-ref">reference </label>
                                                         </div>

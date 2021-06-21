@@ -78,4 +78,8 @@ public class PropertyService {
         propertyRepository.delete(property);
     }
 
+    public List<Property> findAllPropertiesByUser(Long id){
+        return propertyRepository.findPropertiesByUser(id);
+    }
+
 }

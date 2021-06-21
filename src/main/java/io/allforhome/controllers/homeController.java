@@ -6,10 +6,7 @@ import io.allforhome.services.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.io.File;
@@ -22,6 +19,7 @@ import java.util.stream.Collectors;
  */
 
 @Controller
+@SessionAttributes("user")
 public class homeController {
 
     private PropertyService propertyService;
@@ -29,6 +27,11 @@ public class homeController {
     @Autowired
     public homeController(PropertyService propertyService) {
         this.propertyService = propertyService;
+    }
+
+    @ModelAttribute("email")
+    public String initEmail(){
+        return "";
     }
 
     @GetMapping("/")
@@ -48,6 +51,12 @@ public class homeController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginUser(){
         return "user/login";
+    }
+
+    @RequestMapping(value = "/login/authenticate", method = RequestMethod.POST)
+    public String authUser(@RequestParam("email") String email){
+        System.out.println(email);
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/reset", method = RequestMethod.GET)
