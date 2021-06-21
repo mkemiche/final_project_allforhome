@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+    <head>
+        <div th:replace="fragments/head :: myHead"></div>
+    </head>
+    <body>
+        <div th:replace="fragments/navbar :: navbar"></div>
+        <!-- Page content-->
+        <div class="container mt-2">
+            <div class="row" th:each="property: ${properties}">
+                <div class="col-md-10 mt-2">
+                    <a th:href="@{'/property/'+${property.id}}">
+                    <div class="card">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img class="main-img"
+                                     th:src="@{${not #lists.isEmpty(property.pImages)} ? ${path}+''+${property.pImages.get(0).imageName}: ${path}+''+'PJ_default.jpg'}"
+                                     th:alt="${property.pReference}">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title" th:text="${property.pTitle}"></h5>
+
+                                    <p class="card-text">
+                                        <i class="fa fa-usd"></i> <span class="price" th:text="${property.pPrice}"></span>
+                                        <br>
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span th:text="${property.pLocation.city}+' '+${property.pLocation.state}+', '+${property.pLocation.zipcode}"></span>
+                                    </p>
+                                    <p class="card-details" style="position: relative;top: 20px;">
+                                        <span th:if="${property.hasGarage == true}">
+                                             <img class="icons" src="https://image.flaticon.com/icons/png/512/75/75751.png" alt="garage" title="Has a garage">
+                                        </span>
+                                        <span th:if="${property.hasTerrace == true}">
+                                                 <img class="icons" src="https://image.flaticon.com/icons/png/512/1153/1153207.png" alt="Terracee" title="Has a terrace">
+                                             </span>
+                                        <span th:if="${property.hasBasement == true}">
+                                            <img class="icons" src="https://image.flaticon.com/icons/png/512/2825/2825600.png" alt="Basement" title="Has a basement">
+                                        </span>
+                                        <span th:if="${property.hasSPool == true}">
+                                            <img class="icons" src="https://image.flaticon.com/icons/png/512/787/787888.png" alt="Swimming pool" title="Has a swimming pool">
+                                        </span>
+                                        <span th:if="${property.hasBalcony == true}">
+                                            <img class="icons" src="https://image.flaticon.com/icons/png/512/2863/2863234.png" alt="Balcony" title="Has a balcony">
+                                        </span>
+                                        <span th:if="${property.hasGarden == true}">
+                                            <img class="icons" src="https://image.flaticon.com/icons/png/512/1973/1973668.png" alt="Garden" title="Has a garden">
+                                        </span>
+                                        <span class="calendar" style="text-align:right;position: relative;top: 20px;">
+                                            <i class="far fa-calendar-plus common"></i><span class="registration-date" th:text="${property.pUpdateDate.updateDate}"></span>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            </div>
+
+                                <!--                    <div class="card">-->
+<!--                        <div class="row no-gutters">-->
+<!--                            <a th:href="@{'/property/'+${property.id}}">-->
+<!--                                <div class="col-md-5">-->
+<!--                                    <img class="main-img"-->
+<!--                                         th:src="@{${not #lists.isEmpty(property.pImages)} ? ${path}+''+${property.pImages.get(0).imageName}: ${path}+''+'PJ_default.jpg'}"-->
+<!--                                         th:alt="${property.pReference}">-->
+<!--                                </div>-->
+<!--                                <div class="col-md-7">-->
+<!--                                    <div class="card-body">-->
+<!--                                        <h4 class="card-title" th:text="${property.pTitle}"></h4>-->
+<!--                                        <p class="card-text">-->
+<!--                                        <span class="price">-->
+<!--                                            <i class="fa fa-usd"></i> <span th:text="${property.pPrice}"></span>-->
+<!--                                        </span>-->
+<!--                                            <br>-->
+<!--                                            <span class="loc">-->
+<!--                                            <i class="fas fa-map-marker-alt"></i>-->
+<!--                                            <span th:text="${property.pLocation.city}+' '+${property.pLocation.state}+', '+${property.pLocation.zipcode}"></span>-->
+<!--                                        </span>-->
+<!--                                        </p>-->
+<!--                                        <p class="card-details">
+                                        <span th:if="${property.hasGarage == true}">
+                                             <img class="icons" src="https://image.flaticon.com/icons/png/512/75/75751.png" alt="garage" title="Has a garage">
+                                        </span>
+                                            <span th:if="${property.hasTerrace == true}">
+                                                 <img class="icons" src="https://image.flaticon.com/icons/png/512/1153/1153207.png" alt="Terracee" title="Has a terrace">
+                                             </span>
+                                                        <span th:if="${property.hasBasement == true}">
+                                            <img class="icons" src="https://image.flaticon.com/icons/png/512/2825/2825600.png" alt="Basement" title="Has a basement">
+                                        </span>
+                                                        <span th:if="${property.hasSPool == true}">
+                                            <img class="icons" src="https://image.flaticon.com/icons/png/512/787/787888.png" alt="Swimming pool" title="Has a swimming pool">
+                                        </span>
+                                                        <span th:if="${property.hasBalcony == true}">
+                                            <img class="icons" src="https://image.flaticon.com/icons/png/512/2863/2863234.png" alt="Balcony" title="Has a balcony">
+                                        </span>
+                                                        <span th:if="${property.hasGarden == true}">
+                                            <img class="icons" src="https://image.flaticon.com/icons/png/512/1973/1973668.png" alt="Garden" title="Has a garden">
+                                        </span>
+                                        </p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                </div>
+
+        <div th:replace="fragments/footer :: myFooter"></div>
+    </body>
+</html>
