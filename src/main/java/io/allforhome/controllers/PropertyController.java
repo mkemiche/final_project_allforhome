@@ -1,5 +1,6 @@
 package io.allforhome.controllers;
 
+import io.allforhome.enums.Status;
 import io.allforhome.models.Property;
 import io.allforhome.services.PropertyService;
 import io.allforhome.utils.Utils;
@@ -90,6 +91,29 @@ public class PropertyController {
 
         return "property/property_list";
     }
+
+    @RequestMapping(value = "property/lastaddedsale", method = RequestMethod.GET)
+    public String getLastAddedSale(Model model, RedirectAttributes redirectAttributes){
+        List<Property> properties = propertyService.getAllProperties().stream().filter(e->e.getPStatus().equals(Status.SALE.name())).collect(Collectors.toList());
+        properties.sort((o1, o2) -> o2.getId().compareTo(o1.getId()));
+        String path = File.separator+"fileupload" + File.separator;
+        model.addAttribute("properties", properties);
+        model.addAttribute("path", path);
+
+        return "property/property_listing";
+    }
+
+    @RequestMapping(value = "property/lastaddedrent", method = RequestMethod.GET)
+    public String getLastAddedRent(Model model, RedirectAttributes redirectAttributes){
+        List<Property> properties = propertyService.getAllProperties().stream().filter(e->e.getPStatus().equals(Status.RENT.name())).collect(Collectors.toList());
+        properties.sort((o1, o2) -> o2.getId().compareTo(o1.getId()));
+        String path = File.separator+"fileupload" + File.separator;
+        model.addAttribute("properties", properties);
+        model.addAttribute("path", path);
+
+        return "property/property_listing";
+    }
+
 
     @RequestMapping(value = "property/{id}", method = RequestMethod.GET)
     public String getPropertyById(@PathVariable("id") Long id, Model model){

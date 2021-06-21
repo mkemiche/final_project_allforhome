@@ -1,17 +1,294 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org"
-       xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
     <head>
         <div th:replace="fragments/head :: myHead"></div>
     </head>
     <body>
         <div th:replace="fragments/navbar :: navbar"></div>
         <!-- Page content-->
-<div class="row">
-    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="jumbotron">
+                    <!--<h1 class="display-4">Hello, world!</h1>
+                    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra
+                        attention to featured content or information.</p>-->
+                    <hr class="my-4">
+                    <div class="container search-form">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <form th:action="@{'search?category='+ ${category} +'&location='+ ${location} +'&keyword='+${keyword}}"
+                                      method="post">
+                                    <div class="form-group">
+                                        <div class="dropdown" id="category">
+                                            <div class="default-option" id="cat-select">Category</div>
+                                            <input type="hidden" id="selected-category" name="category">
+                                            <div class="dropdown-list">
+                                                <ul>
+                                                    <li>Home</li>
+                                                    <li>Apartment</li>
+                                                    <li>Garage</li>
+                                                    <li>Other</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="dropdown" id="location">
+                                            <div class="default-option" id="loc-select">Location</div>
+                                            <input type="hidden" id="selected-location" name="location">
+                                            <div class="dropdown-list">
+                                                <ul>
+                                                    <li>Columbus</li>
+                                                    <li>Pittsbug</li>
+                                                    <li>Dayton</li>
+                                                    <li>New Albany</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="search">
+                                            <input type="text" class="search-input" placeholder="keyword"
+                                                   name="keyword">
+                                        </div>
+                                        <button class="btn btn-search" type="submit"><i class="fas fa-search"></i>
+                                        </button>
+                                        <span class="btn btn-filter" onclick="displayFilterBlock()"><i
+                                                class="fas fa-filter"></i></span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <form action="">
+                                    <div class="filter">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="status">Status</label>
+                                                <select class="custom-select custom-select-sm" id="status">
+                                                    <option selected>Select value</option>
+                                                    <option value="rent">For Rent</option>
+                                                    <option value="sale">For Sale</option>
+                                                </select>
+                                                <p class="px-2 mb-0 text-muted"> - </p>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" value="true"
+                                                           id="garage">
+                                                    <label class="form-check-label" for="garage">
+                                                        Garage
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="bed">Bedrooms</label>
+                                                <select class="custom-select custom-select-sm" id="bed">
+                                                    <option value="0" selected>Select value</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                </select>
+                                                <p class="px-2 mb-0 text-muted"> - </p>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" value="true"
+                                                           id="basement">
+                                                    <label class="form-check-label" for="basement">
+                                                        Basement
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="bath">Bathrooms</label>
+                                                <select class="custom-select custom-select-sm" id="bath">
+                                                    <option value="0" selected>Select value</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                </select>
+                                                <p class="px-2 mb-0 text-muted"> - </p>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" value="true"
+                                                           id="balcony">
+                                                    <label class="form-check-label" for="balcony">
+                                                        Balcony
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="to">Price</label>
+                                                <input id="from" type="text" class="form-control" placeholder="$ Min">
+                                                <p class="px-2 mb-0 text-muted"> - </p>
+                                                <input id="to" type="text" class="form-control" placeholder="$ Max">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" value="true"
+                                                                   id="terrace">
+                                                            <label class="form-check-label" for="terrace">
+                                                                Terrace
+                                                            </label>
+                                                        </div>
+                                                    </div>
 
-    </div>
-</div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" value="true"
+                                                                   id="garden">
+                                                            <label class="form-check-label" for="garden">
+                                                                Garden
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" value="true"
+                                                                   id="spool">
+                                                            <label class="form-check-label" for="garage">
+                                                                Swimming pool
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-danger btn-apply">
+                                                <i class="fa fa-check common"></i>Apply filter
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h5 class="container mt-2 card-title">Last sale added (<a th:href="@{property/lastaddedsale}" style="font-size: 17px;">View all</a>)</h5>
+        <div class="container mt-2">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 card-list" th:each="propertySale, iter: ${propertiesSale}">
+                    <div class="card card-block">
+                        <a th:href="@{'/property/'+${propertySale.id}}">
+                            <img class="main-img"
+                                 th:src="@{${not #lists.isEmpty(propertySale.pImages)} ? ${path}+''+${propertySale.pImages[0].imageName}: ${path}+''+'PJ_default.jpg'}"
+                                 th:alt="${propertySale.pReference}">
+                            <p class="card-text">
+                            <span class="price">
+                                <i class="fa fa-usd"></i> <span th:text="${propertySale.pPrice}"></span>
+                            </span>
+                                <br>
+                                <span class="loc">
+                                <i class="fas fa-map-marker-alt"></i> <span
+                                        th:text="${propertySale.pLocation.city}+' '+${propertySale.pLocation.state}+', '+${propertySale.pLocation.zipcode}"></span>
+                            </span>
+                                <br><br>
+                            </p>
+                            <br>
+                            <p class="card-details">
+                            <span th:if="${propertySale.hasGarage == true}">
+                                 <img class="icons" src="https://image.flaticon.com/icons/png/512/75/75751.png"
+                                      alt="garage" title="Has a garage">
+                            </span>
+                                <span th:if="${propertySale.hasTerrace == true}">
+                                <img class="icons" src="https://image.flaticon.com/icons/png/512/1153/1153207.png"
+                                     alt="Terracee" title="Has a terrace">
+                            </span>
+                                <span th:if="${propertySale.hasBasement == true}">
+                                <img class="icons" src="https://image.flaticon.com/icons/png/512/2825/2825600.png"
+                                     alt="Basement" title="Has a basement">
+                            </span>
+                                <span th:if="${propertySale.hasSPool == true}">
+                                <img class="icons" src="https://image.flaticon.com/icons/png/512/787/787888.png"
+                                     alt="Swimming pool" title="Has a swimming pool">
+                            </span>
+                                <span th:if="${propertySale.hasBalcony == true}">
+                                <img class="icons" src="https://image.flaticon.com/icons/png/512/2863/2863234.png"
+                                     alt="Balcony" title="Has a balcony">
+                            </span>
+                                <span th:if="${propertySale.hasGarden == true}">
+                                <img class="icons" src="https://image.flaticon.com/icons/png/512/1973/1973668.png"
+                                     alt="Garden" title="Has a garden">
+                            </span>
+                            </p>
+                            <div class="divider"></div>
+                            <p class="card-footer">
+                            <span class="calendar">
+                                <i class="far fa-calendar-plus common"></i><span class="registration-date"
+                                                                                 th:text="${propertySale.pUpdateDate.updateDate}"></span>
+                            </span>
+                            </p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h5 class="container mt-2 card-title">Last rent added (<a th:href="@{property/lastaddedrent}" style="font-size: 17px;">View all</a>)</h5>
+        <div class="container mt-2">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 card-list" th:each="propertyRent, iter: ${propertiesRent}">
+
+                    <div class="card card-block">
+                        <a th:href="@{'/property/'+${propertyRent.id}}">
+                            <img class="main-img"
+                                 th:src="@{${iter.index} == 0 ? ${path}+''+${propertyRent.pImages[0].imageName}: ${path}+''+'PJ_default.jpg'}"
+                                 th:alt="${propertyRent.pReference}">
+                            <p class="card-text">
+                            <span class="price">
+                                <span th:text="${propertyRent.pPrice}"></span>
+                            </span>
+                                <br>
+                                <span class="loc">
+                                <i class="fas fa-map-marker-alt"></i> <span
+                                        th:text="${propertyRent.pLocation.city}+' '+${propertyRent.pLocation.state}+', '+${propertyRent.pLocation.zipcode}"></span>
+                            </span>
+                            </p>
+                            <br>
+                            <p class="card-details">
+                            <span th:if="${propertyRent.hasGarage == true}">
+                                 <img class="icons" src="https://image.flaticon.com/icons/png/512/75/75751.png"
+                                      alt="garage" title="Has a garage">
+                            </span>
+                                <span th:if="${propertyRent.hasTerrace == true}">
+                                <img class="icons" src="https://image.flaticon.com/icons/png/512/1153/1153207.png"
+                                     alt="Terracee" title="Has a terrace">
+                            </span>
+                                <span th:if="${propertyRent.hasBasement == true}">
+                                <img class="icons" src="https://image.flaticon.com/icons/png/512/2825/2825600.png"
+                                     alt="Basement" title="Has a basement">
+                            </span>
+                                <span th:if="${propertyRent.hasSPool == true}">
+                                <img class="icons" src="https://image.flaticon.com/icons/png/512/787/787888.png"
+                                     alt="Swimming pool" title="Has a swimming pool">
+                            </span>
+                                <span th:if="${propertyRent.hasBalcony == true}">
+                                <img class="icons" src="https://image.flaticon.com/icons/png/512/2863/2863234.png"
+                                     alt="Balcony" title="Has a balcony">
+                            </span>
+                                <span th:if="${propertyRent.hasGarden == true}">
+                                <img class="icons" src="https://image.flaticon.com/icons/png/512/1973/1973668.png"
+                                     alt="Garden" title="Has a garden">
+                            </span>
+                            </p>
+                            <div class="divider"></div>
+                            <p class="card-footer">
+                            <span class="calendar">
+                                <i class="far fa-calendar-plus common"></i><span class="registration-date"
+                                                                                 th:text="${propertyRent.pUpdateDate.updateDate}"></span>
+                            </span>
+                            </p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div th:replace="fragments/footer :: myFooter"></div>
     </body>
 </html>

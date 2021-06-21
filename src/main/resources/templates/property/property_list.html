@@ -18,7 +18,7 @@
                     </div>
                 </div>-->
 
-                <div class="col-md-3 col-sm-6 card-list"  th:each="property, iter: ${properties}" >
+                <div class="col-md-3 col-sm-6 card-list"  th:each="property: ${properties}" >
                     <div class="card card-block">
                         <a th:href="@{'/property/'+${property.id}}">
                         <img class="main-img" th:src="@{${iter.index} == 0 ? ${path}+''+${property.pImages[0].imageName}: ${path}+''+'PJ_default.jpg'}" th:alt="${property.pReference}">

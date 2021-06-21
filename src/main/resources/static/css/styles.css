@@ -103,11 +103,15 @@ body{
     color: #f89d13;
 }
 
-h5 {
+/*h5 {
     text-align: center;
     margin-top: -12%;
     margin-bottom: 10%;
     color: white;
+}*/
+
+a:hover {
+  text-decoration: none;
 }
 .common {
     margin-right: 10px;
@@ -129,9 +133,8 @@ h5 {
     margin: 60px auto;
 }
 
-img {
+img.main-img {
     width: 100%;
-    margin: 10px auto;
 }
 
 .intro, .desc, .details, .location, .images {
@@ -338,6 +341,7 @@ small{
 
 .card-wrapper .img-item img {
     height: 83px;
+    width: 25%;
 }
 .card-wrapper .img-item:nth-child(1),
 .card-wrapper .img-item:nth-child(2),
@@ -400,6 +404,7 @@ small{
 .contact img {
     width: 40%;
     border-radius: 50%;
+    margin: 10px auto;
 }
 
 .contact .container {
