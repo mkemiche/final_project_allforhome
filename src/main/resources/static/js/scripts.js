@@ -297,7 +297,7 @@ $(".next:eq(3)").each(function(){
 });
 
 var verifyCheckboxesIfChecked = function(){
-    $('input[type*="checkbox"]').each(function(){
+    $('.more-details input[type*="checkbox"]').each(function(){
         $(this).parent().removeClass('btn-warning').addClass('btn-outline-warning');
         if($(this).is(':checked')){
             $(this).parent().removeClass('btn-outline-warning').addClass('btn-warning');
@@ -306,7 +306,7 @@ var verifyCheckboxesIfChecked = function(){
 }
 
 
-$('input[type*="checkbox"]').each(function(){
+$('.more-details input[type*="checkbox"]').each(function(){
     $(this).on('click', function(){
          if($(this).is(':checked')){
             $(this).parent().removeClass('btn-outline-warning').addClass('btn-warning');
@@ -396,3 +396,45 @@ window.addEventListener('resize', slideImage);
         $('.container.reset-block').toggle();
     })
 }*/
+
+$(".search-form .dropdown#category").on('click', function(){
+        $(".search-form #category .dropdown-list ul").toggle();
+    });
+
+    $(".search-form #category .dropdown-list ul li").on('click', function(){
+        var icon_text = $(this).html();
+        $(".search-form #category .default-option").html(icon_text);
+    });
+
+    $(document).on('click', function(event){
+        if(!$(event.target).closest(".search-form .dropdown#category").length){
+            $(".search-form #category .dropdown-list ul").hide();
+        }
+    });
+
+    $(".search-form .dropdown#location").on('click', function(){
+            $(".search-form #location .dropdown-list ul").toggle();
+        });
+
+        $(".search-form #location .dropdown-list ul li").on('click', function(){
+            var icon_text = $(this).html();
+            $(".search-form #location .default-option").html(icon_text);
+        });
+
+        $(document).on('click', function(event){
+            if(!$(event.target).closest(".search-form .dropdown#location").length){
+                $(".search-form #location .dropdown-list ul").hide();
+            }
+        });
+
+function displayFilterBlock(){
+    $('.filter').toggle();
+}
+
+$('#cat-select').bind('DOMSubtreeModified', function(){
+   $('#selected-category').val($(this).html());
+});
+
+$('#loc-select').bind('DOMSubtreeModified', function(){
+   $('#selected-location').val($(this).html());
+});

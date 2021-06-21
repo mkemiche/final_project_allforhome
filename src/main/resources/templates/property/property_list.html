@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org"
-       xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
     <head>
         <div th:replace="fragments/head :: myHead"></div>
     </head>
@@ -9,109 +9,62 @@
         <!-- Page content-->
         <div class="container mt-2">
             <div class="row" id="grid">
-                <!--<div class="col-md-3 col-sm-6" th:each="property: ${properties}">
-                    <div class="card card-block">
-                        <h4 class="card-title text-right"><i class="material-icons">settings</i></h4>
-                        <img th:src="@{${path}+''+${property.pImages[0].imageName}}" alt="Photo of sunset">
-                        <h5 class="card-title mt-3 mb-3" th:text="${property.pTitle}"></h5>
-                        <p class="card-text"></p>
-                    </div>
-                </div>-->
-
-                <div class="col-md-3 col-sm-6 card-list"  th:each="property: ${properties}" >
+                <div class="col-md-3 col-sm-6 card-list" th:each="property: ${properties}">
                     <div class="card card-block">
                         <a th:href="@{'/property/'+${property.id}}">
-                        <img class="main-img" th:src="@{${iter.index} == 0 ? ${path}+''+${property.pImages[0].imageName}: ${path}+''+'PJ_default.jpg'}" th:alt="${property.pReference}">
-                        <p class="card-text">
+                            <img class="main-img"
+                                 th:src="@{${iter.index} == 0 ? ${path}+''+${property.pImages[0].imageName}: ${path}+''+'PJ_default.jpg'}"
+                                 th:alt="${property.pReference}">
+                            <p class="card-text">
                             <span class="price">
                                 <i class="fa fa-usd"></i> <span th:text="${property.pPrice}"></span>
                             </span>
+                                <br>
+                                <span class="loc">
+                                <i class="fas fa-map-marker-alt"></i> <span
+                                        th:text="${property.pLocation.city}+' '+${property.pLocation.state}+', '+${property.pLocation.zipcode}"></span>
+                            </span>
+                                <br><br>
+                            </p>
                             <br>
-                            <span class="loc">
-                                <i class="fas fa-map-marker-alt"></i> <span th:text="${property.pLocation.city}+' '+${property.pLocation.state}+', '+${property.pLocation.zipcode}"></span>
-                            </span>
-                            <br><br>
-<!--                            <span class="bed">3 Bedrooms</span>-->
-<!--                            <br>-->
-<!--                            <span class="bath">2 Bathrooms</span>-->
-                        </p>
-                        <br>
-                        <p class="card-details">
+                            <p class="card-details">
                             <span th:if="${property.hasGarage == true}">
-                                 <img class="icons" src="https://image.flaticon.com/icons/png/512/75/75751.png" alt="garage" title="Has a garage">
+                                 <img class="icons" src="https://image.flaticon.com/icons/png/512/75/75751.png"
+                                      alt="garage" title="Has a garage">
                             </span>
-                            <span th:if="${property.hasTerrace == true}">
-                                <img class="icons" src="https://image.flaticon.com/icons/png/512/1153/1153207.png" alt="Terracee" title="Has a terrace">
+                                <span th:if="${property.hasTerrace == true}">
+                                <img class="icons" src="https://image.flaticon.com/icons/png/512/1153/1153207.png"
+                                     alt="Terracee" title="Has a terrace">
                             </span>
-                            <span th:if="${property.hasBasement == true}">
-                                <img class="icons" src="https://image.flaticon.com/icons/png/512/2825/2825600.png" alt="Basement" title="Has a basement">
+                                <span th:if="${property.hasBasement == true}">
+                                <img class="icons" src="https://image.flaticon.com/icons/png/512/2825/2825600.png"
+                                     alt="Basement" title="Has a basement">
                             </span>
-                            <span th:if="${property.hasSPool == true}">
-                                <img class="icons" src="https://image.flaticon.com/icons/png/512/787/787888.png" alt="Swimming pool" title="Has a swimming pool">
+                                <span th:if="${property.hasSPool == true}">
+                                <img class="icons" src="https://image.flaticon.com/icons/png/512/787/787888.png"
+                                     alt="Swimming pool" title="Has a swimming pool">
                             </span>
-                            <span th:if="${property.hasBalcony == true}">
-                                <img class="icons" src="https://image.flaticon.com/icons/png/512/2863/2863234.png" alt="Balcony" title="Has a balcony">
+                                <span th:if="${property.hasBalcony == true}">
+                                <img class="icons" src="https://image.flaticon.com/icons/png/512/2863/2863234.png"
+                                     alt="Balcony" title="Has a balcony">
                             </span>
-                            <span th:if="${property.hasGarden == true}">
-                                <img class="icons" src="https://image.flaticon.com/icons/png/512/1973/1973668.png" alt="Garden" title="Has a garden">
+                                <span th:if="${property.hasGarden == true}">
+                                <img class="icons" src="https://image.flaticon.com/icons/png/512/1973/1973668.png"
+                                     alt="Garden" title="Has a garden">
                             </span>
-                        </p>
-                        <div class="divider"></div>
-                        <p class="card-footer">
+                            </p>
+                            <div class="divider"></div>
+                            <p class="card-footer">
                             <span class="calendar">
-                                <i class="far fa-calendar-plus common"></i><span class="registration-date" th:text="${property.pUpdateDate.updateDate}"></span>
+                                <i class="far fa-calendar-plus common"></i><span class="registration-date"
+                                                                                 th:text="${property.pUpdateDate.updateDate}"></span>
                             </span>
-                        </p>
+                            </p>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
-<!--        <div class="container mt-2">-->
-<!--            <div class="row" id="list">-->
-<!--                <div class="col-md-8" style="margin: 5px auto;" th:each="property: ${properties}">-->
-<!--                    <div class="card card-block">-->
-<!--                        <div class="row">-->
-<!--                            <div class="col-md-4" style="margin: auto;">-->
-<!--                                <img th:src="@{${path}+''+${property.pImages[0].imageName}}" th:alt="${property.pReference}" style="margin:0;">-->
-<!--                            </div>-->
-
-<!--                            <div class="col-md-8">-->
-<!--                                <p class="card-text">-->
-<!--                            <span class="price">-->
-<!--                                <i class="fa fa-usd"></i> <span th:text="${property.pPrice}"></span>-->
-<!--                            </span>-->
-<!--                                    <br>-->
-<!--                                    <span class="loc">-->
-<!--                                <i class="fas fa-map-marker-alt"></i> <span th:text="${property.pLocation.city}+' '+${property.pLocation.state}+', '+${property.pLocation.zipcode}"></span>-->
-<!--                            </span>-->
-<!--                                    <br><br>-->
-<!--                                    <span class="bed">3 Bedrooms</span>-->
-<!--                                    <br>-->
-<!--                                    <span class="bath">2 Bathrooms</span>-->
-<!--                                </p>-->
-<!--                                <br>-->
-<!--                                <p class="card-details">-->
-<!--                                    <img class="icons" src="https://image.flaticon.com/icons/png/512/75/75751.png" alt="garage" title="Has a garage">-->
-<!--                                    <img class="icons" src="https://image.flaticon.com/icons/png/512/1153/1153207.png" alt="Terracee" title="Has a terrace">-->
-<!--                                    <img class="icons" src="https://image.flaticon.com/icons/png/512/2825/2825600.png" alt="Basement" title="Has a basement">-->
-<!--                                    <img class="icons" src="https://image.flaticon.com/icons/png/512/787/787888.png" alt="Swimming pool" title="Has a swimming pool">-->
-<!--                                    <img class="icons" src="https://image.flaticon.com/icons/png/512/2863/2863234.png" alt="Balcony" title="Has a balcony">-->
-<!--                                    <img class="icons" src="https://image.flaticon.com/icons/png/512/1973/1973668.png" alt="Garden" title="Has a garden">-->
-<!--                                </p>-->
-<!--                                <div class="divider"></div>-->
-<!--                                <p class="card-footer">-->
-<!--                            <span class="calendar">-->
-<!--                                <i class="far fa-calendar-plus common"></i><span class="registration-date" th:text="${property.pUpdateDate.updateDate}"></span>-->
-<!--                            </span>-->
-<!--                                </p>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-
         <div th:replace="fragments/footer :: myFooter"></div>
     </body>
 </html>

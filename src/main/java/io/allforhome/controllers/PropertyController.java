@@ -122,4 +122,14 @@ public class PropertyController {
         return "property/property_details";
     }
 
+    @RequestMapping(value = "search?category={category}&location={location}&keyword={keyword}", method = RequestMethod.POST)
+    public String searchProperties(@PathVariable("category") String category,
+                                   @PathVariable("location") String location,
+                                   @PathVariable("keyword") String keyword,
+                                   Model model){
+
+        System.out.println(category+" "+location+"  "+keyword);
+        return "";
+    }
+
 }
