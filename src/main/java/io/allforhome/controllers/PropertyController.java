@@ -91,5 +91,11 @@ public class PropertyController {
         return "property/property_list";
     }
 
+    @RequestMapping(value = "property/{id}", method = RequestMethod.GET)
+    public String getPropertyById(@PathVariable("id") Long id, Model model){
+        Property propery = propertyService.findPropertyById(id);
+        model.addAttribute("property", propery);
+        return "property/property_details";
+    }
 
 }
