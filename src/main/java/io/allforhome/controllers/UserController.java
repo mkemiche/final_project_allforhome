@@ -4,15 +4,18 @@ import io.allforhome.enums.Role;
 import io.allforhome.models.*;
 import io.allforhome.services.CompanyService;
 import io.allforhome.services.UserService;
+import io.allforhome.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author mkemiche
@@ -56,7 +59,6 @@ public class UserController {
     public String initUsername(){
         return "";
     }
-
     @ModelAttribute("email")
     public String initEmail(){
         return "";
@@ -77,11 +79,6 @@ public class UserController {
         return "";
     }
 
-    @ModelAttribute("emptycPassword")
-    public String initemptycPassword(){
-        return "";
-    }
-
     @ModelAttribute("invalidConfirmation")
     public String initinvalidConfirmation(){
         return "";
@@ -94,19 +91,21 @@ public class UserController {
         return "";
     }
 
-//    @RequestMapping(value = "user/resetuserpassword", method = RequestMethod.POST)
-//    public String userConnectedResetPassword(@RequestParam("password") @Valid String password,
-//                                             @RequestParam("cpassword") String cPassword, Model model){
-//
-//
-//        boolean isValid = userService.checkValidatePassword(password, cPassword, model);
-//
-//        if(!isValid){
-//            return "user/register";
-//        }
-//        System.out.println("email  " + password);
-//        return "user/reset_password";
-//    }
+    @RequestMapping(value = "user/reset", method = RequestMethod.GET)
+    public String resetPassword(){
+        return "user/reset_password";
+    }
+
+    @RequestMapping(value = "user/reset", method = RequestMethod.POST)
+    public String resetPassword(@RequestParam("email") @Valid String email){
+        System.out.println("email  " + email);
+        return "user/reset_password";
+    }
+
+    @RequestMapping(value = "user/login", method = RequestMethod.GET)
+    public String loginUser(){
+        return "user/login";
+    }
 
     @RequestMapping(value = "user/register", method = RequestMethod.GET)
     public String registerNewUser(Model model){
@@ -117,10 +116,22 @@ public class UserController {
     public String registerNewUser(@ModelAttribute("privateuser") @Valid PrivateUser privateUser,  BindingResult result,
                                   @RequestParam("cpassword") String cPassword, Model model){
 
-        boolean isValid = userService.checkValidatePassword(privateUser.getUPassword(), cPassword, model);
+        if(result.hasErrors()){
+            if(cPassword.isBlank()){
+                model.addAttribute("emptyPassword", "This field is required");
+            }
+            return "user/register";
+        }
 
+        if(cPassword.isBlank()){
+            model.addAttribute("invalidConfirmation", "Password's confirmation is failed. Please try again");
+            return "user/register";
+        }
+
+        boolean isValid = Utils.checkPasswordConfirmation(privateUser.getUPassword(), cPassword);
         if(!isValid){
-           return "user/register";
+            model.addAttribute("invalidConfirmation", "Password's confirmation is invalid. Please try again");
+            return "user/register";
         }
         //setRole
         privateUser.setURoles(Role.ROLE_PRIVATE_USER.getRole());
@@ -142,10 +153,22 @@ public class UserController {
                                   Model model){
 
 
-        boolean isValid = userService.checkValidatePassword(agent.getUPassword(), cPassword, model);
+        if(result.hasErrors() || res.hasErrors()){
+            if(cPassword.isBlank()){
+                model.addAttribute("emptyPassword", "This field is required");
+            }
+            return "user/add_agency";
+        }
 
+        if(cPassword.isBlank()){
+            model.addAttribute("invalidConfirmation", "Password's confirmation is failed. Please try again");
+            return "user/add_agency";
+        }
+
+        boolean isValid = Utils.checkPasswordConfirmation(agent.getUPassword(), cPassword);
         if(!isValid){
-            return "user/register";
+            model.addAttribute("invalidConfirmation", "Password's confirmation is invalid. Please try again");
+            return "user/add_agency";
         }
 
         //setRole
@@ -155,24 +178,6 @@ public class UserController {
         agency.setAgents(List.of(agent));
         companyService.saveCompany(agency);
         return "redirect:/";
-    }
-
-    @RequestMapping(value = "user/{id}", method = RequestMethod.GET)
-    public String getPropertyById(@PathVariable("id") Long id, Model model){
-        Optional<User> user = userService.getUserById(id);
-        if(user.isEmpty()){
-            System.out.println("user not found");
-        }
-        if(user.get().getURoles().contains(Role.ROLE_PRIVATE_USER.getRole())){
-            PrivateUser privateUser = (PrivateUser) user.get();
-            model.addAttribute("privateUser", privateUser);
-            model.addAttribute("username", privateUser.getUsername());
-            return "user/user_view";
-        }
-
-        Agent agent = (Agent) user.get();
-        model.addAttribute("agent", agent);
-        return "user/agent_view";
     }
 
 

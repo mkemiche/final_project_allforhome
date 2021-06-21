@@ -18,10 +18,9 @@
                     </div>
                 </div>-->
 
-                <div class="col-md-3 col-sm-6 card-list"  th:each="property: ${properties}" >
+                <div class="col-md-3 col-sm-6 card-list"  th:each="property: ${properties}">
                     <div class="card card-block">
-                        <a th:href="@{'/property/'+${property.id}}">
-                        <img class="main-img" th:src="@{${iter.index} == 0 ? ${path}+''+${property.pImages[0].imageName}: ${path}+''+'PJ_default.jpg'}" th:alt="${property.pReference}">
+                        <img th:src="@{${path}+''+${property.pImages[0].imageName}}" th:alt="${property.pReference}">
                         <p class="card-text">
                             <span class="price">
                                 <i class="fa fa-usd"></i> <span th:text="${property.pPrice}"></span>
@@ -62,7 +61,6 @@
                                 <i class="far fa-calendar-plus common"></i><span class="registration-date" th:text="${property.pUpdateDate.updateDate}"></span>
                             </span>
                         </p>
-                        </a>
                     </div>
                 </div>
             </div>

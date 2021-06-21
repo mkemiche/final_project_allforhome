@@ -1,6 +1,5 @@
 package io.allforhome.controllers;
 
-import io.allforhome.enums.Status;
 import io.allforhome.models.Property;
 import io.allforhome.services.PropertyService;
 import io.allforhome.utils.Utils;
@@ -38,22 +37,6 @@ public class PropertyController {
     public String initRef(){
         return "";
     }
-
-    @ModelAttribute("category")
-    public String initCat(){
-        return "";
-    }
-
-    @ModelAttribute("location")
-    public String initLoc(){
-        return "";
-    }
-
-    @ModelAttribute("keyword")
-    public String initKeyword(){
-        return "";
-    }
-
 
     @RequestMapping(value = "property/getallproperties", method = RequestMethod.GET)
     public String getAllProperties(Model model){
@@ -106,46 +89,6 @@ public class PropertyController {
         model.addAttribute("path", path);
 
         return "property/property_list";
-    }
-
-    @RequestMapping(value = "property/lastaddedsale", method = RequestMethod.GET)
-    public String getLastAddedSale(Model model, RedirectAttributes redirectAttributes){
-        List<Property> properties = propertyService.getAllProperties().stream().filter(e->e.getPStatus().equals(Status.SALE.name())).collect(Collectors.toList());
-        properties.sort((o1, o2) -> o2.getId().compareTo(o1.getId()));
-        String path = File.separator+"fileupload" + File.separator;
-        model.addAttribute("properties", properties);
-        model.addAttribute("path", path);
-
-        return "property/property_listing";
-    }
-
-    @RequestMapping(value = "property/lastaddedrent", method = RequestMethod.GET)
-    public String getLastAddedRent(Model model, RedirectAttributes redirectAttributes){
-        List<Property> properties = propertyService.getAllProperties().stream().filter(e->e.getPStatus().equals(Status.RENT.name())).collect(Collectors.toList());
-        properties.sort((o1, o2) -> o2.getId().compareTo(o1.getId()));
-        String path = File.separator+"fileupload" + File.separator;
-        model.addAttribute("properties", properties);
-        model.addAttribute("path", path);
-
-        return "property/property_listing";
-    }
-
-
-    @RequestMapping(value = "property/{id}", method = RequestMethod.GET)
-    public String getPropertyById(@PathVariable("id") Long id, Model model){
-        Property propery = propertyService.findPropertyById(id);
-        model.addAttribute("property", propery);
-        return "property/property_details";
-    }
-
-    @RequestMapping(value = "search?category={category}&location={location}&keyword={keyword}", method = RequestMethod.POST)
-    public String searchProperties(@PathVariable("category") String category,
-                                   @PathVariable("location") String location,
-                                   @PathVariable("keyword") String keyword,
-                                   Model model){
-
-        System.out.println(category+" "+location+"  "+keyword);
-        return "";
     }
 
 

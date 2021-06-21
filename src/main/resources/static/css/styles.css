@@ -103,15 +103,11 @@ body{
     color: #f89d13;
 }
 
-/*h5 {
+h5 {
     text-align: center;
     margin-top: -12%;
     margin-bottom: 10%;
     color: white;
-}*/
-
-a:hover {
-  text-decoration: none;
 }
 .common {
     margin-right: 10px;
@@ -133,8 +129,9 @@ a:hover {
     margin: 60px auto;
 }
 
-img.main-img {
+img {
     width: 100%;
+    margin: 10px auto;
 }
 
 .intro, .desc, .details, .location, .images {
@@ -149,15 +146,15 @@ img.main-img {
     border-color: grey;
 }
 
-.more-details input[type=checkbox] { display:none; } /* to hide the checkbox itself */
-.more-details input[type=checkbox] + label:before {
+input[type=checkbox] { display:none; } /* to hide the checkbox itself */
+input[type=checkbox] + label:before {
   font-family: FontAwesome;
   display: inline-block;
 }
 
-.more-details input[type=checkbox] + label:before { content: "\f096"; letter-spacing: 10px; }
+input[type=checkbox] + label:before { content: "\f096"; letter-spacing: 10px; }
 
-.more-details input[type=checkbox]:checked + label:before {
+input[type=checkbox]:checked + label:before {
     content: "\f046"; /* checked icon */
     letter-spacing: 10px; /* allow space for check mark */
     .btn-outline-warning{
@@ -215,17 +212,17 @@ small{
 }
 
 /* custom images */
-.card-list img .main-img {
+.card-block > img{
   height:150px;
   width:100%;
 }
 
-.card-list div [class^="col-"]{
+div [class^="col-"]{
   padding-left:5px;
   padding-right:5px;
   margin-top: 15px;
 }
-.card-list  .card{
+.card-list .card{
   transition:0.5s;
   cursor:pointer;
   padding: 10px;
@@ -251,7 +248,7 @@ small{
   box-shadow: 10px 10px 15px rgba(0,0,0,0.3);
 }
 .card-list .card-text{
-  height:90px;
+  height:120px;
   margin-top: 1em;
 }
 .card-list .card-details {
@@ -264,7 +261,7 @@ small{
     height:20px;
 }
 
-.card-list  .card::before, .card-list  .card::after {
+.card-list .card::before, .card-list .card::after {
   position: absolute;
   top: 0;
   right: 0;
@@ -282,7 +279,7 @@ small{
 .card-list  .card::after {
   transform-origin: right bottom;
 }
-.card-list  .card:hover::before, .card-list  .card:hover::after, .card-list  .card:focus::before, .card-list  .card:focus::after {
+.card-list  .card:hover::before, .card-list .card:hover::after, .card-list .card:focus::before, .card-list .card:focus::after {
   transform: scale3d(1, 1, 1);
 }
 
@@ -304,150 +301,22 @@ small{
     font-family: emoji;
 }
 
-.card-title {
+.card-list .card-title {
     color: black;
     font-family: monospace;
 }
 
-/* gallery image custom */
-
-.card-wrapper{
-    max-width: 1100px;
-    margin: 0 auto;
-}
-.card-wrapper img{
-    width: 100%;
-    display: block;
-}
-.card-wrapper .img-display{
-    overflow: hidden;
-}
-.card-wrapper .img-showcase{
-    display: flex;
-    width: 100%;
-    transition: all 0.5s ease;
-    height: 300px;
-}
-.card-wrapper .img-showcase img{
-    min-width: 100%;
-}
-.card-wrapper .img-select{
-    display: flex;
-}
-.card-wrapper .img-item{
-    margin: 0.3rem;
-    height: 90px;
+/* search form custom */
+* {
+    box-sizing: border-box;
 }
 
-.card-wrapper .img-item img {
-    height: 83px;
-    width: 25%;
-}
-.card-wrapper .img-item:nth-child(1),
-.card-wrapper .img-item:nth-child(2),
-.card-wrapper .img-item:nth-child(3){
-    margin-right: 0;
-}
-.card-wrapper .img-item:hover{
-    opacity: 0.8;
-}
-
-/*
-@media screen and (min-width: 768px) , (max-width: 1280px){
-    .card-wrapper .card{
-        display: grid;
-       */
-/* grid-template-columns: repeat(2, 1fr);*//*
-
-        grid-gap: 1.5rem;
-    }
-    .card-wrapper{
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .card-wrapper .product-imgs{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-}
-
-@media screen and (min-width: 480px){
-    .card-wrapper .card{
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 1.5rem;
-    }
-    .card-wrapper{
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .card-wrapper .product-imgs{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-    */
-/*.card-wrapper .product-content{
-        padding-top: 0;
-    }*//*
-
+/*.container {
+    position: absolute;
+    top: 50%;
+    left: 50%
+    transform: translate(-50%, -50%);
 }*/
-
-.contact .card {
-    background-color: transparent;
-}
-.contact img {
-    width: 40%;
-    border-radius: 50%;
-    margin: 10px auto;
-}
-
-.contact .container {
-    text-align: center;
-}
-
-.contact .btn {
-    width: 100%;
-}
-
-.registration-date {
-    font-size: smaller;
-    font-style: italic;
-}
-
-.property-details .price {
-    font-size: x-large;
-    color: #f89d13;
-}
-.property-details .fa-usd {
-    color: #f89d13;
-}
-
-.btn.details {
-    border-radius: 50px;
-    width: 150px;
-    color: #000;
-}
-
-.card.w-80{
-    width: 80%;
-    margin: auto;
-    background-color: transparent;
-}
-
-.card-body.user-details {
-    margin: auto;
-}
-
-.container .col-md-11.mt-5 {
-    border: 1px solid lightgrey;
-    border-radius: 5px;
-}
 
 .search-form .title {
     color: #fff;
@@ -477,7 +346,7 @@ small{
     cursor: pointer;
 }
 
-.search-form .default-option{
+.search-form .default-option, .filter .default-option {
     padding: 8px 30px;
 }
 
@@ -487,16 +356,13 @@ small{
     color: #696969;
     position: absolute;
     top: 60px;
-    left: -2px;
+    left: 14px;
     width: 150px;
     border-radius: 5px;
     display: none;
-    z-index: 1;
-    padding: 30px;
-    border: 0.5px solid lightgrey;
 }
 
-.search-form dropdown-list ul li {
+.search-form dropdown-list ul li, .filter dropdown-list ul li {
     padding: 10px 10px 10px 20px;
 }
 
@@ -504,7 +370,7 @@ small{
     margin-right: 5px;
 }*/
 
-.search-form .dropdown::before  {
+.search-form .dropdown::before, .filter .dropdown::before {
     content: "";
     border-width: 6px 6px 0 6px;
     border-style: solid;
@@ -514,7 +380,7 @@ small{
     top: 20px;
 }
 
-.search-form .dropdown-list ul li:before {
+.search-form .dropdown-list ul li:before, .filter .dropdown-list ul li:before {
     content: "";
     border-width: 0px 8px 8px 8px;
     border-style: solid;
@@ -524,7 +390,7 @@ small{
     right: 20px;
 }
 
-.search-form .dropdown-list ul li:hover{
+.search-form .dropdown-list ul li:hover, .filter .dropdown-list ul li:hover {
     background-color: #fff;
     color: #f44336;
     font-weight: bold;
@@ -545,7 +411,7 @@ small{
     color: #3a3a3a;
 }
 
-.search-form .btn.btn-search, .search-form .btn.btn-filter {
+.search-form .btn {
     background-color: #fff;
     width: 50px;
     height: 100%;
@@ -553,7 +419,7 @@ small{
     cursor: pointer;
 }
 
-.search-form .btn.btn-search {
+.search-form .btn-search {
      border-right: 2px solid #f57168;
      border-radius: 0;
 }
@@ -572,30 +438,44 @@ small{
     outline: none;
 }
 
-.filter {
+.filter .dropdown {
+    position: relative;
+    width: 150px;
+    padding-left: 5px;
+    color: #3a3a3a;
+    cursor: pointer;
     background-color: #fff;
-    padding: 40px;
-    border-radius: 30px;
-    display: none;
+    border-radius: 40px;
 }
 
-.filter:before {
-    content: "";
-    border-width: 0px 12px 12px 12px;
-    border-style: solid;
-    border-color: #fff transparent;
+.filter .dropdown-list ul {
+    list-style: none;
+    background-color: #fff;
+    color: #696969;
     position: absolute;
-    bottom: 100%;
-    right: 40px;
+    top: 50px;
+    left: 3px;
+    width: 150px;
+    border-radius: 5px;
+   /* display: none;*/
 }
 
-.text-center .btn.btn-apply {
-    background-color: #f57168;
-    border-color: #f57168;
-    margin-top: 40px;
+.filter .dropdown::before {
+    position: absolute;
+    right: 16px;
+    top: 17px;
 }
 
-.text-center .btn.btn-apply:hover {
-    background-color: red;
-    border-color: red;
+.filter .dropdown-list ul li:before {
+    position: absolute;
+    right: 29px;
 }
+
+ul#horizontal-list {
+	min-width: 696px;
+	list-style: none;
+	padding-top: 20px;
+	}
+	ul#horizontal-list li {
+		display: inline;
+	}

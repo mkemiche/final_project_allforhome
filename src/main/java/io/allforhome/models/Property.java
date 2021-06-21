@@ -8,7 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -81,7 +80,7 @@ public class Property {
 
     @OneToMany
     @ToString.Exclude
-    private List<Image> pImages = new ArrayList<>();
+    private List<Image> pImages;
 
     public Property(String pReference, String pTitle, String pDescription, String pStatus, String pCategory, String pType, String pBuiltYear, String pPrice, String pArea, int pBedrooms, int pBathrooms, boolean hasGarage, boolean hasBasement, boolean hasBalcony, boolean hasTerrace, boolean hasSPool, boolean hasGarden, RegistrationDate pUpdateDate, Location pLocation, List<Image> pImages) {
         this.pReference = pReference;

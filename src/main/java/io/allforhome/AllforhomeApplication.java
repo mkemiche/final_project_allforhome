@@ -40,7 +40,7 @@ public class AllforhomeApplication implements CommandLineRunner {
 		Location loc3 = new Location("7762 street two","New Albany","43320","OH");
 
 
-		PrivateUser user1 = new PrivateUser("user1@gmail.com","pass", String.format("%s", Role.ROLE_PRIVATE_USER),"user1");
+		PrivateUser user1 = new PrivateUser("user1@gmail.com","pass", String.format("%s",Role.ROLE_PRIVATE_USER),"user1");
 		PrivateUser user2 = new PrivateUser("user2@gmail.com","pass", String.format("%s",Role.ROLE_PRIVATE_USER),"user2");
 		PrivateUser user3 = new PrivateUser("user3@gmail.com","pass", String.format("%s",Role.ROLE_PRIVATE_USER),"user3");
 		PrivateUser user4 = new PrivateUser("user4@gmail.com","pass", String.format("%s",Role.ROLE_PRIVATE_USER),"user4");
@@ -58,7 +58,7 @@ public class AllforhomeApplication implements CommandLineRunner {
 		Agent agent6 = new Agent("agent6","pass",String.format("%s",Role.ROLE_AGENT_USER), Title.MR.getTitle(), "marc","daniel");
 
 
-		RSAgency company = new RSAgency("AZFY2666276","company name one","6149826776","company1@gmail.com", loc, List.of(agent1));
+		RSAgency company = new RSAgency("AZFY2666276","company name one","6149826776","company1@gmail.com", loc,List.of(agent1));
 		RSAgency company2 = new RSAgency("AZFY266682","company name one","6149826776","company2@gmail.com", loc2,List.of(agent2, agent4));
 		RSAgency company3 = new RSAgency("AZFY26662897","company name one", "6149826776","company3@gmail.com", loc3,List.of(agent3, agent5, agent6));
 
@@ -73,7 +73,7 @@ public class AllforhomeApplication implements CommandLineRunner {
 		userService.saveUser(agent5);
 		userService.saveUser(agent5);
 
-		/*Image image = new Image("PJ_REF18153308_0.jpg");
+		Image image = new Image("PJ_REF18153308_0.jpg");
 		Image image2 = new Image("PJ_REF18153308_1.jpg");
 		Image image3 = new Image("PJ_REF18153308_2.jpg");
 		Image image4 = new Image("PJ_REF18153308_3.jpg");
