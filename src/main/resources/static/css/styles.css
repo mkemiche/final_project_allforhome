@@ -222,6 +222,7 @@ div [class^="col-"]{
   padding-right:5px;
   margin-top: 15px;
 }
+
 .card-list .card{
   transition:0.5s;
   cursor:pointer;
@@ -279,6 +280,7 @@ div [class^="col-"]{
 .card-list  .card::after {
   transform-origin: right bottom;
 }
+
 .card-list  .card:hover::before, .card-list .card:hover::after, .card-list .card:focus::before, .card-list .card:focus::after {
   transform: scale3d(1, 1, 1);
 }
@@ -479,3 +481,190 @@ ul#horizontal-list {
 	ul#horizontal-list li {
 		display: inline;
 	}
+
+/* gallery image custom */
+
+.card-wrapper{
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.card-wrapper img{
+    width: 100%;
+    display: block;
+
+}
+
+/*.container {
+    position: absolute;
+    top: 50%;
+    left: 50%
+    transform: translate(-50%, -50%);
+}*/
+
+.search-form .title {
+    color: #fff;
+    text-transform: capitalize;
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 38px;
+    font-family: sans-serif;
+    text-shadow: 0px 5px 5px rgba(0,0,0,0.4);
+}
+
+.search-form .form-group {
+    background-color: #fff;
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    border-radius: 30px;
+    box-shadow: 0px 2 px 4px 0px rgba(12, 18, 18, 0.4);
+}
+
+.search-form  .dropdown {
+    position: relative;
+    width: 150px;
+    padding-left: 5px;
+    color: #3a3a3a;
+    border-right: 2px solid #f57168;
+    cursor: pointer;
+}
+
+.search-form .default-option, .filter .default-option {
+    padding: 8px 30px;
+}
+
+.search-form .dropdown-list ul {
+    list-style: none;
+    background-color: #fff;
+    color: #696969;
+    position: absolute;
+    top: 60px;
+    left: 14px;
+    width: 150px;
+    border-radius: 5px;
+    display: none;
+}
+
+.search-form dropdown-list ul li, .filter dropdown-list ul li {
+    padding: 10px 10px 10px 20px;
+}
+
+/*.search-form dropdown-list ul li i {
+    margin-right: 5px;
+}*/
+
+.search-form .dropdown::before, .filter .dropdown::before {
+    content: "";
+    border-width: 6px 6px 0 6px;
+    border-style: solid;
+    border-color: #1d1d1d transparent;
+    position: absolute;
+    right: 6px;
+    top: 20px;
+}
+
+.search-form .dropdown-list ul li:before, .filter .dropdown-list ul li:before {
+    content: "";
+    border-width: 0px 8px 8px 8px;
+    border-style: solid;
+    border-color: #fff transparent;
+    position: absolute;
+    bottom: 100%;
+    right: 20px;
+}
+
+.search-form .dropdown-list ul li:hover, .filter .dropdown-list ul li:hover {
+    background-color: #fff;
+    color: #f44336;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-form .search {
+    width: 600px;
+    height: 100%;
+}
+
+.search-form .search-input {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    padding: 10px 10px;
+    color: #3a3a3a;
+}
+
+.search-form .btn {
+    background-color: #fff;
+    width: 50px;
+    height: 100%;
+    border: 0;
+    cursor: pointer;
+}
+
+.search-form .btn-search {
+     border-right: 2px solid #f57168;
+     border-radius: 0;
+}
+
+.search-form .btn .fa-search, .search-form .btn .fa-filter{
+    font-size: 22px;
+    color: #f57168;
+}
+
+.search-form .btn .fa-search:hover, .search-form .btn .fa-filter:hover {
+    font-size: 24px;
+    color: #e01f10;
+}
+
+.search-form input, .search-form button:focus{
+    outline: none;
+}
+
+.filter .dropdown {
+    position: relative;
+    width: 150px;
+    padding-left: 5px;
+    color: #3a3a3a;
+    cursor: pointer;
+    background-color: #fff;
+    border-radius: 40px;
+}
+
+.filter .dropdown-list ul {
+    list-style: none;
+    background-color: #fff;
+    color: #696969;
+    position: absolute;
+    top: 50px;
+    left: 3px;
+    width: 150px;
+    border-radius: 5px;
+   /* display: none;*/
+}
+
+.filter .dropdown::before {
+    position: absolute;
+    right: 16px;
+    top: 17px;
+}
+
+.filter .dropdown-list ul li:before {
+    position: absolute;
+    right: 29px;
+}
+
+ul#horizontal-list {
+	min-width: 696px;
+	list-style: none;
+	padding-top: 20px;
+	}
+	ul#horizontal-list li {
+		display: inline;
+	}
+
+.container .col-md-11.mt-5 {
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+}
+

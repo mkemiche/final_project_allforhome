@@ -5,6 +5,7 @@ $(document).ready(function(){
     manageStepTemplate();
     uploadImage();
     searchBar();
+    formatCurrency();
 });
 
 var manageStepTemplate = function() {
@@ -361,6 +362,16 @@ var searchBar = function() {
 $(".search-form .dropdown").on('click', function(){
         $(".search-form .dropdown-list ul").toggle();
     });
+    $(".search-form .dropdown-list ul li").on('click', function(){
+        var icon_text = $(this).html();
+        $(".search-form .default-option").html(icon_text);
+    });
+
+    $(document).on('click', function(event){
+        if(!$(event.target).closest(".search-form .dropdown").length){
+            $(".search-form .dropdown-list ul").hide();
+        }
+    })
 
     $(".search-form .dropdown-list ul li").on('click', function(){
         var icon_text = $(this).html();
@@ -372,3 +383,13 @@ $(".search-form .dropdown").on('click', function(){
             $(".search-form .dropdown-list ul").hide();
         }
     })
+window.addEventListener('resize', slideImage);
+
+//reset password block display
+/*var displayResetPasswordBlock = function() {
+    $('.container.reset-block').hide();
+    $('#btn-reset-pass').on('click', function(){
+        $('.container.reset-block').toggle();
+    })
+}*/
+
