@@ -1,6 +1,8 @@
 package io.allforhome.controllers;
 
 import io.allforhome.enums.Role;
+import io.allforhome.exceptions.UserAlreadyExistsException;
+import io.allforhome.exceptions.UserNotFoundException;
 import io.allforhome.models.*;
 import io.allforhome.services.CompanyService;
 import io.allforhome.services.UserService;
@@ -20,6 +22,7 @@ import java.util.Optional;
  */
 
 @Controller
+@SessionAttributes("user")
 public class UserController {
 
 
@@ -122,9 +125,14 @@ public class UserController {
         if(!isValid){
            return "user/register";
         }
-        //setRole
-        privateUser.setURoles(Role.ROLE_PRIVATE_USER.getRole());
-        userService.saveUser(privateUser);
+        try {
+            //setRole
+            privateUser.setURoles(Role.ROLE_PRIVATE_USER.getRole());
+            userService.saveUser(privateUser);
+        }catch (UserAlreadyExistsException e){
+            model.addAttribute("useralreadyexists", e.getMsg());
+            return "user/register";
+        }
         return "redirect:/";
     }
 
@@ -161,7 +169,7 @@ public class UserController {
     public String getPropertyById(@PathVariable("id") Long id, Model model){
         Optional<User> user = userService.getUserById(id);
         if(user.isEmpty()){
-            System.out.println("user not found");
+            throw new UserNotFoundException(String.format("User id: %d doesn't exists"));
         }
         if(user.get().getURoles().contains(Role.ROLE_PRIVATE_USER.getRole())){
             PrivateUser privateUser = (PrivateUser) user.get();

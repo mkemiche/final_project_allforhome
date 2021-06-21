@@ -2,13 +2,14 @@ package io.allforhome.exceptions;
 
 /**
  * @author mkemiche
- * @created 05/06/2021
+ * @created 21/06/2021
  */
-public class PropertyNotFoundException extends RuntimeException {
+
+public class FileStorageException extends RuntimeException{
 
     private static final long serialVersionUID = 1L;
     private String msg;
-    public PropertyNotFoundException(String msg) {
+    public FileStorageException(String msg) {
         this.msg=msg;
     }
 

@@ -4,7 +4,6 @@ import io.allforhome.repositories.ImageUploadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author mkemiche
@@ -16,10 +15,10 @@ public class Utils {
     @Autowired
     private ImageUploadRepository imageUploadRepository;
 
-    private static AtomicInteger counter = new AtomicInteger(0);
+    private static Integer counter = 0;
 
     public static String generateImageName(String pRef, String fileExtension){
-        return String.format("PJ%s%d%s", pRef, counter.getAndIncrement(), fileExtension);
+        return String.format("PJ_%s_%d_%s", pRef, counter++, fileExtension);
     }
 
     public static String generatePropertyRef(){

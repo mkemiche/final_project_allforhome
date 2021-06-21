@@ -1,6 +1,6 @@
 package io.allforhome.services;
 
-import io.allforhome.exceptions.ResourceNotFoundException;
+import io.allforhome.exceptions.UserNotFoundException;
 import io.allforhome.models.Image;
 import io.allforhome.models.Property;
 import io.allforhome.models.RegistrationDate;
@@ -39,7 +39,7 @@ public class PropertyService {
     public void createProperty(Property property){
         if(property == null){
             log.severe("Try to add property null");
-            throw new ResourceNotFoundException();
+            throw new UserNotFoundException("Try to add property null");
         }
 
         property.setPUpdateDate(new RegistrationDate(LocalDateTime.now()));

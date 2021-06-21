@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.FileNotFoundException;
+
 /**
  * @author mkemiche
  * @created 10/06/2021
@@ -32,14 +34,12 @@ public class UploadController {
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public String uploadFile(@ModelAttribute("file") MultipartFile file,
                              @RequestParam("ref") String ref,
-                             RedirectAttributes redirectAttributes) {
+                             RedirectAttributes redirectAttributes) throws FileNotFoundException {
 
+        if(file.isEmpty()){
+            throw new FileNotFoundException("Atteched file not found");
+        }
         imageUploadService.saveImage(file, ref);
-
-       // List<String> filesUploaded = imageUploadService.getAllImagesByRefProperty(ref).stream().map(i-> "fileupload" + File.separator + i.getImageName()).collect(Collectors.toList());
-        //redirectAttributes.addFlashAttribute("message", "You successfully uploaded " + filename);
-       // redirectAttributes.addFlashAttribute("files", filesUploaded);
-
         return "redirect:/uploadForm";
     }
 

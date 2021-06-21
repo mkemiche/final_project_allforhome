@@ -1,13 +1,16 @@
 package io.allforhome.services;
 
+import io.allforhome.exceptions.UserAlreadyExistsException;
 import io.allforhome.models.RegistrationDate;
 import io.allforhome.models.User;
 import io.allforhome.repositories.UserRepository;
+import io.allforhome.security.AppSecurityConfig;
 import io.allforhome.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -18,14 +21,21 @@ import java.util.Optional;
  */
 
 @Service
+@Transactional
 public class UserService {
 
 
     @Autowired
     UserRepository userRepository;
 
-    public void saveUser(User user){
+    public void saveUser(User user) throws UserAlreadyExistsException{
+
+        if(userRepository.findUserByuEmail(user.getUEmail()).isPresent()){
+            throw new UserAlreadyExistsException("This email is already exists in the database. \nInsert another email or reset password.");
+        }
+
         user.setRegistration(new RegistrationDate(LocalDateTime.now()));
+        user.setUPassword(AppSecurityConfig.getPasswordEncoder().encode(user.getUPassword()));
         userRepository.save(user);
     }
 

@@ -1,6 +1,6 @@
 package io.allforhome.utils;
 
-import io.allforhome.exceptions.ResourceNotFoundException;
+import io.allforhome.exceptions.UserNotFoundException;
 
 /**
  * @author mkemiche
@@ -13,11 +13,11 @@ public class Preconditions {
     }
 
 
-    public static void checkFound(final boolean expression) {
+    /*public static void checkFound(final boolean expression) {
         if (!expression) {
-            throw new ResourceNotFoundException();
+            throw new UserNotFoundException();
         }
-    }
+    }*/
 
 
     /**
@@ -25,14 +25,14 @@ public class Preconditions {
      * @param resource
      * @param <T>
      * @return
-     * @throws ResourceNotFoundException
+     * @throws UserNotFoundException
      */
-    public static <T> T checkFound(final T resource) {
-        if (resource == null) {
-            throw new ResourceNotFoundException();
-        }
-        return resource;
-    }
+//    public static <T> T checkFound(final T resource) {
+//        if (resource == null) {
+//            throw new UserNotFoundException();
+//        }
+//        return resource;
+//    }
 
 
 }

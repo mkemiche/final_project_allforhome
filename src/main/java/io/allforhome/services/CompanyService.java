@@ -1,10 +1,12 @@
 package io.allforhome.services;
 
+import io.allforhome.exceptions.UserNotFoundException;
 import io.allforhome.models.RSAgency;
 import io.allforhome.repositories.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +16,7 @@ import java.util.Optional;
  */
 
 @Service
+@Transactional
 public class CompanyService {
 
     @Autowired
@@ -23,7 +26,7 @@ public class CompanyService {
         companyRepository.save(rsCompany);
     }
 
-    public Optional<RSAgency> getUserById(Long id){
+    public Optional<RSAgency> getUserById(Long id) throws UserNotFoundException {
         return companyRepository.findById(id);
     }
 
