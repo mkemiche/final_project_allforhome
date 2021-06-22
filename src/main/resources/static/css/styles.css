@@ -135,6 +135,7 @@ a:hover {
 
 img.main-img {
     width: 100%;
+    height: 155px;
 }
 
 .intro, .desc, .details, .location, .images {

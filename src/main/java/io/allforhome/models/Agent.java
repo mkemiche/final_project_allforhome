@@ -36,6 +36,7 @@ public class Agent extends User{
     @Size(min = 3, max = 30, message = "This field must be between 3 and 30 characters")
     private String agentLastName;
 
+    private Long agents_id = 0L;
 
     public Agent(String email, String password, String roles, String title, String agentFirstName, String agentLastName) {
         super(email, password, roles);

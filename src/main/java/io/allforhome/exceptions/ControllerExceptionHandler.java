@@ -1,9 +1,8 @@
 package io.allforhome.exceptions;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author mkemiche
@@ -13,35 +12,27 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
+    @ResponseBody
     @ExceptionHandler(FileStorageException.class)
-    public ModelAndView handleException(FileStorageException exception, RedirectAttributes redirectAttributes){
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("message", exception.getMsg());
-        mav.setViewName("error");
-        return mav;
+    public String handleException(FileStorageException exception){
+        return exception.getMsg();
     }
 
+    @ResponseBody
     @ExceptionHandler(UserNotFoundException.class)
-    public ModelAndView handleException(UserNotFoundException exception, RedirectAttributes redirectAttributes){
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("message", exception.getMsg());
-        mav.setViewName("error");
-        return mav;
+    public String handleException(UserNotFoundException exception){
+        return exception.getMsg();
     }
 
+    @ResponseBody
     @ExceptionHandler(PropertyNotFoundException.class)
-    public ModelAndView handleException(PropertyNotFoundException exception, RedirectAttributes redirectAttributes){
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("message", exception.getMsg());
-        mav.setViewName("error");
-        return mav;
+    public String handleException(PropertyNotFoundException exception){
+        return exception.getMsg();
     }
 
+    @ResponseBody
     @ExceptionHandler(CompanyNotFoundException.class)
-    public ModelAndView handleException(CompanyNotFoundException exception, RedirectAttributes redirectAttributes){
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("message", exception.getMsg());
-        mav.setViewName("error");
-        return mav;
+    public String handleException(CompanyNotFoundException exception){
+        return exception.getMsg();
     }
 }
