@@ -5,6 +5,7 @@ import io.allforhome.services.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.util.List;
 
@@ -15,7 +16,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/property")
-public class PrepertyControllerAPI {
+@EnableWebMvc
+public class PropertyControllerAPI {
 
     @Autowired
     PropertyService propertyService;
@@ -37,13 +39,13 @@ public class PrepertyControllerAPI {
         propertyService.createProperty(property);
     }
 
-    @PutMapping("/{id}/updateproperty")
-    public void updateProperty(@PathVariable("id") Long id, @RequestBody Property property){
+    @PutMapping("/{id}")
+    public void updateProperty(@PathVariable("id") Long id, @RequestBody Property property) throws Exception {
         propertyService.updateProperty(property);
     }
 
-    @DeleteMapping("/{id}/deleteproperty")
-    public void deleteProperty(@PathVariable("id") Long id){
+    @DeleteMapping("/{id}")
+    public void deleteProperty(@PathVariable("id") Long id) throws Exception {
         propertyService.removeProperty(id);
     }
 

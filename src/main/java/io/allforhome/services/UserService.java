@@ -43,7 +43,7 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    public List<User> getAllUser(){
+    public List<User> getAllUsers(){
         return userRepository.findAll();
     }
 
@@ -71,4 +71,30 @@ public class UserService {
     public Optional<User> findUserByEmail(String email){
         return userRepository.findUserByuEmail(email);
     }
+
+    public void removeUser(Long id) throws Exception {
+        Optional<User> userOptional = getUserById(id);
+        if(userOptional.isEmpty()){
+            throw new Exception(String.format("User id: %d doesn't exists", id));
+        }
+        try {
+            userRepository.delete(userOptional.get());
+        }catch (Exception e){
+            throw new Exception("Problem occured while deleting");
+        }
+
+    }
+
+    public void updateUser(User user) throws Exception {
+        if(user == null){
+            throw new Exception("Request property not found");
+        }
+        try{
+            userRepository.save(user);
+        }catch (Exception e){
+            throw new Exception("problem occured while updating");
+        }
+
+    }
+
 }

@@ -12,8 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 public class ImageUploadControllerAPI {
 
-   // private static final String SUB_DIR = "/Users/mouloudkemiche/perscholas/final_project/final_project_allforhome/src/main/resources/upload";
-
     @Autowired
     private ImageUploadService imageUploadService;
 

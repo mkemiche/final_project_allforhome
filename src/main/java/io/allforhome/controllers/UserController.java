@@ -95,7 +95,7 @@ public class UserController {
 
     @RequestMapping(value = "user/getalluser", method = RequestMethod.GET)
     public String getAllUsers(Model model){
-        List<User> users = userService.getAllUser();
+        List<User> users = userService.getAllUsers();
         model.addAttribute("users", users);
         return "";
     }

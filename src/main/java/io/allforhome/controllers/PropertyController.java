@@ -86,14 +86,14 @@ public class PropertyController {
     }
 
     @RequestMapping(value = "property/{id}/updateproperty", method = RequestMethod.PUT)
-    public String updateProperty(@PathVariable("id") Long id, @ModelAttribute("property") Property property){
+    public String updateProperty(@PathVariable("id") Long id, @ModelAttribute("property") Property property) throws Exception {
         propertyService.updateProperty(property);
 
         return null;
     }
 
     @RequestMapping(value = "property/{id}/deleteproperty", method = RequestMethod.DELETE)
-    public String deleteProperty(@PathVariable("id") Long id){
+    public String deleteProperty(@PathVariable("id") Long id) throws Exception {
         propertyService.removeProperty(id);
 
         return null;
