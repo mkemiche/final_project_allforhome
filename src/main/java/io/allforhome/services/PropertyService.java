@@ -1,5 +1,6 @@
 package io.allforhome.services;
 
+import io.allforhome.exceptions.PropertyNotFoundException;
 import io.allforhome.exceptions.UserNotFoundException;
 import io.allforhome.models.Image;
 import io.allforhome.models.Property;
@@ -51,21 +52,17 @@ public class PropertyService {
     public void updateProperty(Property property){
         if(property == null){
             log.severe("Try to update property null");
+            throw new PropertyNotFoundException("Requested property not found");
         }
-        //FIXME add function update
         propertyRepository.save(property);
     }
 
     public Property findPropertyById(Long id){
-        if(id == null){
-            log.severe("id cannot be null");
-            return null;
-        }
         Optional<Property> p = propertyRepository.findById(id);
 
         if(p.isEmpty()){
             log.info("Property with id "+ id +" does not exist");
-            return null;
+            throw new PropertyNotFoundException("Property id: "+id+" not found");
         }
         return p.get();
     }
@@ -73,7 +70,8 @@ public class PropertyService {
     public void removeProperty(Long id){
         Property property = findPropertyById(id);
         if(property == null){
-            log.severe("Try to remove property null");
+            log.info("Property with id "+ id +" does not exist");
+            throw new PropertyNotFoundException("Property id: "+id+" not found");
         }
         propertyRepository.delete(property);
     }

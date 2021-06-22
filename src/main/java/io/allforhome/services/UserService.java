@@ -1,6 +1,7 @@
 package io.allforhome.services;
 
 import io.allforhome.exceptions.UserAlreadyExistsException;
+import io.allforhome.exceptions.UserNotFoundException;
 import io.allforhome.models.RegistrationDate;
 import io.allforhome.models.User;
 import io.allforhome.repositories.UserRepository;
@@ -70,5 +71,30 @@ public class UserService {
 
     public Optional<User> findUserByEmail(String email){
         return userRepository.findUserByuEmail(email);
+    }
+
+    public void removeUser(Long id) throws Exception {
+        Optional<User> userOptional = getUserById(id);
+        if(userOptional.isEmpty()){
+            throw new UserNotFoundException(String.format("User id: %d doesn't exists", id));
+        }
+        try {
+            userRepository.delete(userOptional.get());
+        }catch (Exception e){
+            throw new Exception("Problem occured while deleting");
+        }
+
+    }
+
+    public void updateUser(User user) throws Exception {
+        if(user == null){
+            throw new UserNotFoundException("Requested user not found");
+        }
+        try{
+            userRepository.save(user);
+        }catch (Exception e){
+            throw new Exception("problem occured while updating");
+        }
+
     }
 }

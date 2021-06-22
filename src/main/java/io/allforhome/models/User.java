@@ -1,5 +1,6 @@
 package io.allforhome.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -38,6 +39,7 @@ public class User {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "Registration_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private RegistrationDate registration = new RegistrationDate();
 
     public User(String uEmail, String uPassword, String uRoles) {

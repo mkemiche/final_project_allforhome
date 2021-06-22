@@ -75,6 +75,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/register").permitAll()
                 .antMatchers("/company/register").permitAll()
                 .antMatchers("/property/**").permitAll()
+                .antMatchers("/api/**").permitAll()
                 .antMatchers("/admin/**").hasAnyAuthority(Role.ROLE_SUPER_ADMIN.toString())
                 .antMatchers("/property/newproperty").hasAnyAuthority(Role.ROLE_PRIVATE_USER.toString(), Role.ROLE_AGENT_USER.toString(), Role.ROLE_AGENT_ADMIN.toString())
 //                .antMatchers("/user/**").hasAuthority(Role.ROLE_STUDENT.toString())

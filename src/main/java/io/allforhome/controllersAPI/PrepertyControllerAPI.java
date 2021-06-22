@@ -37,12 +37,12 @@ public class PrepertyControllerAPI {
         propertyService.createProperty(property);
     }
 
-    @PutMapping("/{id}/updateproperty")
+    @PutMapping("/{id}")
     public void updateProperty(@PathVariable("id") Long id, @RequestBody Property property){
         propertyService.updateProperty(property);
     }
 
-    @DeleteMapping("/{id}/deleteproperty")
+    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public void deleteProperty(@PathVariable("id") Long id){
         propertyService.removeProperty(id);
     }
