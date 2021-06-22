@@ -95,7 +95,6 @@ public class PropertyController {
     @RequestMapping(value = "property/{id}/deleteproperty", method = RequestMethod.DELETE)
     public String deleteProperty(@PathVariable("id") Long id){
         propertyService.removeProperty(id);
-
         return null;
     }
 

@@ -38,21 +38,26 @@ public class PrepertyControllerAPI {
     }
 
     @ApiOperation(value = "Register new property")
-    @PostMapping("/newproperty")
-    public void newProperty(@RequestBody Property property){
+    @PostMapping(value = "/newproperty", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String newProperty(@RequestBody Property property){
         propertyService.createProperty(property);
+        return "property added with reference"+property.getPReference();
     }
 
     @ApiOperation(value = "Update property by its id if exists")
     @PutMapping("/{id}")
-    public void updateProperty(@PathVariable("id") Long id, @RequestBody Property property){
-        propertyService.updateProperty(property);
+    public String updateProperty(@PathVariable("id") Long id, @RequestBody Property newProperty){
+
+        Property oldprop = propertyService.findPropertyById(id);
+        propertyService.updateProperty(propertyService.setPropertyFields(oldprop, newProperty));
+        return "property " +id+ " updated";
     }
 
     @ApiOperation(value = "Remove property by its id if exists")
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void deleteProperty(@PathVariable("id") Long id){
+    public String deleteProperty(@PathVariable("id") Long id){
         propertyService.removeProperty(id);
+        return "property " +id+ " removed";
     }
 
 

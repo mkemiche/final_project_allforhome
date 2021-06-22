@@ -68,16 +68,27 @@ public class PropertyService {
     }
 
     public void removeProperty(Long id){
-        Property property = findPropertyById(id);
+        /*Property property = findPropertyById(id);
         if(property == null){
             log.info("Property with id "+ id +" does not exist");
             throw new PropertyNotFoundException("Property id: "+id+" not found");
-        }
-        propertyRepository.delete(property);
+        }*/
+        propertyRepository.deleteById(id);
     }
 
     public List<Property> findAllPropertiesByUser(Long id){
         return propertyRepository.findPropertiesByUser(id);
     }
 
+    public Property setPropertyFields(Property oldprop, Property newProperty) {
+        oldprop.setPArea(newProperty.getPArea());
+        oldprop.setPDescription(newProperty.getPDescription());
+        oldprop.setPBathrooms(newProperty.getPBathrooms());
+        oldprop.setPTitle(newProperty.getPTitle());
+        oldprop.setPBedrooms(newProperty.getPBedrooms());
+        oldprop.setPPrice(newProperty.getPPrice());
+        oldprop.setPType(newProperty.getPType());
+
+        return oldprop;
+    }
 }
