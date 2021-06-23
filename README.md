@@ -22,10 +22,11 @@ As an agent, I should login as an agent, so that I can remove my post
 
 ## Data modeling
 
-
+![datamodel](https://user-images.githubusercontent.com/9609106/123092212-3e916c00-d3f8-11eb-965c-430a2e952379.png)
 
 ## Bootstrap Swagger 2
 
 To access to the swagger API documentation, must start server and open link http://localhost:8080/swagger-ui/
 
+<img width="1280" alt="Capture d’écran 2021-06-23 à 00 16 53" src="https://user-images.githubusercontent.com/9609106/123092423-713b6480-d3f8-11eb-944b-2d4f4eacc516.png">
 
