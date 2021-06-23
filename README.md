@@ -26,6 +26,6 @@ As an agent, I should login as an agent, so that I can remove my post
 
 ## Bootstrap Swagger 2
 
-To access to the swagger API documentation, ypu must start server and use open link http://localhost:8080/swagger-ui/
+To access to the swagger API documentation, must start server and open link http://localhost:8080/swagger-ui/
 
 
