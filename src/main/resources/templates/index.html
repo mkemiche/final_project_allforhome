@@ -17,8 +17,7 @@
                     <div class="container search-form">
                         <div class="row">
                             <div class="col-md-8">
-                                <form th:action="@{'search?category='+ ${category} +'&location='+ ${location} +'&keyword='+${keyword}}"
-                                      method="post">
+                                <form th:action="@{/filter}" method="post">
                                     <div class="form-group">
                                         <div class="dropdown" id="category">
                                             <div class="default-option" id="cat-select">Category</div>
@@ -38,7 +37,7 @@
                                             <div class="dropdown-list">
                                                 <ul>
                                                     <li>Columbus</li>
-                                                    <li>Pittsbug</li>
+                                                    <li>Pittsburg</li>
                                                     <li>Dayton</li>
                                                     <li>New Albany</li>
                                                 </ul>
@@ -238,7 +237,7 @@
                     <div class="card card-block">
                         <a th:href="@{'/property/'+${propertyRent.id}}">
                             <img class="main-img"
-                                 th:src="@{${iter.index} == 0 ? ${path}+''+${propertyRent.pImages[0].imageName}: ${path}+''+'PJ_default.jpg'}"
+                                 th:src="@{${not #lists.isEmpty(propertyRent.pImages)} ? ${path}+''+${propertyRent.pImages[0].imageName}: ${path}+''+'PJ_default.jpg'}"
                                  th:alt="${propertyRent.pReference}">
                             <p class="card-text">
                             <span class="price">

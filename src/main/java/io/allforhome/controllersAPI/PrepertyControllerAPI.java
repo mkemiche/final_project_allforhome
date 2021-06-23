@@ -1,11 +1,15 @@
 package io.allforhome.controllersAPI;
 
+import io.allforhome.models.Agent;
+import io.allforhome.models.PrivateUser;
 import io.allforhome.models.Property;
 import io.allforhome.services.PropertyService;
+import io.allforhome.services.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +25,9 @@ import java.util.List;
 public class PrepertyControllerAPI {
 
     @Autowired
-    PropertyService propertyService;
+    private PropertyService propertyService;
+    @Autowired
+    private UserService userService;
 
     @ApiOperation(value = "Return all properties existing in the database")
     @GetMapping(value = "/getallproperties", produces = "application/json")
@@ -39,9 +45,19 @@ public class PrepertyControllerAPI {
 
     @ApiOperation(value = "Register new property")
     @PostMapping(value = "/newproperty", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String newProperty(@RequestBody Property property){
+    public String newProperty(@RequestBody Property property, Model model){
+
+        var u = userService.getUserById(property.getUser().getUId()).get();
+        if(u instanceof PrivateUser){
+            PrivateUser  pu = (PrivateUser) u;
+            property.setUser(pu);
+        }else if(u instanceof Agent){
+            Agent ag = (Agent) u;
+            property.setUser(ag);
+        }
+
         propertyService.createProperty(property);
-        return "property added with reference"+property.getPReference();
+        return "property added with reference "+property.getPReference();
     }
 
     @ApiOperation(value = "Update property by its id if exists")

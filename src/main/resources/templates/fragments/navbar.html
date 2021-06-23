@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <nav class="navbar navbar-icon-top navbar-expand navbar-light" style="background-color: #e3f2fd;">
-                        <a class="navbar-brand" href="#">Navbar</a>
+                        <a class="navbar-brand" href="#"></a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                                 data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                                 aria-label="Toggle navigation">
@@ -53,7 +53,7 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right"
                                          aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" href="#"><i class="fas fa-user-cog common"></i>Update
+                                        <a class="dropdown-item" th:href="@{'/user/'+${user_id}}"><i class="fas fa-user-cog common"></i>View
                                             profil</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" th:href="@{/logout}"><i class="fas fa-sign-out-alt common"></i>

@@ -68,12 +68,13 @@ public class PropertyService {
     }
 
     public void removeProperty(Long id){
-        /*Property property = findPropertyById(id);
+        Property property = findPropertyById(id);
         if(property == null){
             log.info("Property with id "+ id +" does not exist");
             throw new PropertyNotFoundException("Property id: "+id+" not found");
-        }*/
-        propertyRepository.deleteById(id);
+        }
+        property.setUser(null);
+        propertyRepository.delete(property);
     }
 
     public List<Property> findAllPropertiesByUser(Long id){

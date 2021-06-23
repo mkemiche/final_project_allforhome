@@ -37,8 +37,6 @@ public class User {
 
     private String uRoles;
 
-    private Long id = 0L;
-
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "Registration_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})

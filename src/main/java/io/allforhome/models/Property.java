@@ -87,7 +87,7 @@ public class Property {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<Image> pImages = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL, targetEntity = User.class)
+    @ManyToOne(cascade=CascadeType.ALL, targetEntity = User.class)
     @JoinColumn(name = "user_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private User user;

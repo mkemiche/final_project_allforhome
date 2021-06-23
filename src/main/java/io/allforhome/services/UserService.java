@@ -2,6 +2,7 @@ package io.allforhome.services;
 
 import io.allforhome.exceptions.UserAlreadyExistsException;
 import io.allforhome.exceptions.UserNotFoundException;
+import io.allforhome.models.PrivateUser;
 import io.allforhome.models.RegistrationDate;
 import io.allforhome.models.User;
 import io.allforhome.repositories.UserRepository;
@@ -74,19 +75,15 @@ public class UserService {
     }
 
     public void removeUser(Long id) throws Exception {
-        Optional<User> userOptional = getUserById(id);
-        if(userOptional.isEmpty()){
-            throw new UserNotFoundException(String.format("User id: %d doesn't exists", id));
-        }
         try {
-            userRepository.delete(userOptional.get());
+            userRepository.deleteById(id);
         }catch (Exception e){
             throw new Exception("Problem occured while deleting");
         }
 
     }
 
-    public void updateUser(User user) throws Exception {
+    public void updateUser(PrivateUser user) throws Exception {
         if(user == null){
             throw new UserNotFoundException("Requested user not found");
         }
@@ -96,5 +93,11 @@ public class UserService {
             throw new Exception("problem occured while updating");
         }
 
+    }
+
+    public PrivateUser updateUserFields(PrivateUser oldUser, PrivateUser user) {
+        oldUser.setUsername(user.getUsername());
+        oldUser.setUEmail(user.getUEmail());
+        return oldUser;
     }
 }
