@@ -1,5 +1,7 @@
 package io.allforhome.controllersAPI;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.allforhome.enums.Role;
 import io.allforhome.exceptions.UserNotFoundException;
 import io.allforhome.models.Agent;
@@ -44,27 +46,37 @@ public class UserControllerAPI {
 
     @ApiOperation(value = "Register new user")
     @PostMapping("/newuser")
-    public void newUser(@RequestBody PrivateUser user){
+    public PrivateUser newUser(@RequestBody PrivateUser user){
         user.setURoles(Role.ROLE_PRIVATE_USER.getRole());
         userService.saveUser(user);
+
+        return user;
+
     }
 
     @PostMapping("/newagent")
-    public void newAgent(@RequestBody User user){
+    public Agent newAgent(@RequestBody User user) throws JsonProcessingException {
         Agent agent = (Agent) user;
         agent.setURoles(Role.ROLE_AGENT_USER.getRole());
         userService.saveUser(agent);
+        return agent;
     }
 
     @ApiOperation(value = "Update user by its id if exists")
     @PutMapping("/{id}")
-    public void updateUser(@PathVariable("id") Long id, @RequestBody User user) throws Exception {
-        userService.updateUser(user);
+    public String updateUser(@PathVariable("id") Long id, @RequestBody PrivateUser user) throws Exception {
+
+        PrivateUser oldUser = (PrivateUser) userService.getUserById(id).get();
+        var newUser = userService.updateUserFields(oldUser, user);
+        userService.updateUser(newUser);
+
+        return new ObjectMapper().writeValueAsString(newUser);
     }
 
     @ApiOperation(value = "Remove property by its id if exists")
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable("id") Long id) throws Exception {
+    public String deleteUser(@PathVariable("id") Long id) throws Exception {
         userService.removeUser(id);
+        return new ObjectMapper().writeValueAsString("user id: "+id+" deleted");
     }
 }

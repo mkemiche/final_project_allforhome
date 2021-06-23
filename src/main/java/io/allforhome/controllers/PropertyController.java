@@ -2,6 +2,8 @@ package io.allforhome.controllers;
 
 import io.allforhome.enums.Status;
 import io.allforhome.exceptions.UserNotFoundException;
+import io.allforhome.models.Agent;
+import io.allforhome.models.PrivateUser;
 import io.allforhome.models.Property;
 import io.allforhome.models.User;
 import io.allforhome.services.PropertyService;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -33,6 +36,8 @@ public class PropertyController {
     @Autowired
     private PropertyService propertyService;
 
+    private static final String PATH = File.separator+"fileupload" + File.separator;
+
     @Autowired
     private UserService userService;
 
@@ -48,6 +53,21 @@ public class PropertyController {
 
     @ModelAttribute("email")
     public String initEmail(){
+        return "";
+    }
+
+    @ModelAttribute("category")
+    public String initcategory(){
+        return "";
+    }
+
+    @ModelAttribute("location")
+    public String initlocation(){
+        return "";
+    }
+
+    @ModelAttribute("keyword")
+    public String initkeyword(){
         return "";
     }
 
@@ -102,9 +122,8 @@ public class PropertyController {
     @RequestMapping(value = "/getlastaddedproperty", method = RequestMethod.GET)
     public String getLastAddedProperty(Model model, RedirectAttributes redirectAttributes){
         List<Property> properties = propertyService.getAllProperties().stream().sorted(Comparator.comparing(Property::getId).reversed()).collect(Collectors.toList());
-        String path = File.separator+"fileupload" + File.separator;
         model.addAttribute("properties", properties);
-        model.addAttribute("path", path);
+        model.addAttribute("path", PATH);
 
         return "property/property_list";
     }
@@ -113,9 +132,8 @@ public class PropertyController {
     public String getLastAddedSale(Model model, RedirectAttributes redirectAttributes){
         List<Property> properties = propertyService.getAllProperties().stream().filter(e->e.getPStatus().equals(Status.SALE.name())).collect(Collectors.toList());
         properties.sort((o1, o2) -> o2.getId().compareTo(o1.getId()));
-        String path = File.separator+"fileupload" + File.separator;
         model.addAttribute("properties", properties);
-        model.addAttribute("path", path);
+        model.addAttribute("path", PATH);
 
         return "property/property_listing";
     }
@@ -124,9 +142,8 @@ public class PropertyController {
     public String getLastAddedRent(Model model, RedirectAttributes redirectAttributes){
         List<Property> properties = propertyService.getAllProperties().stream().filter(e->e.getPStatus().equals(Status.RENT.name())).collect(Collectors.toList());
         properties.sort((o1, o2) -> o2.getId().compareTo(o1.getId()));
-        String path = File.separator+"fileupload" + File.separator;
         model.addAttribute("properties", properties);
-        model.addAttribute("path", path);
+        model.addAttribute("path", PATH);
 
         return "property/property_listing";
     }
@@ -135,19 +152,52 @@ public class PropertyController {
     @RequestMapping(value = "property/{id}", method = RequestMethod.GET)
     public String getPropertyById(@PathVariable("id") Long id, Model model){
         Property property = propertyService.findPropertyById(id);
-        model.addAttribute("property", property);
+        var user = userService.getUserById(property.getUser().getUId());
+        if(user.isPresent()){
+            if(user.get() instanceof PrivateUser){
+                String username = ((PrivateUser) user.get()).getUsername();
+                model.addAttribute("username", username);
+            }else if(user.get() instanceof Agent){
+                String fullname = ((Agent) user.get()).getAgentFirstName() +" "+((Agent) user.get()).getAgentLastName();
+                model.addAttribute("username", fullname);
+            }
+        }
         model.addAttribute("user_id", property.getUser().getUId());
+        model.addAttribute("property", property);
+
+
         return "property/property_details";
     }
 
-    @RequestMapping(value = "search?category={category}&location={location}&keyword={keyword}", method = RequestMethod.POST)
-    public String searchProperties(@PathVariable("category") String category,
-                                   @PathVariable("location") String location,
-                                   @PathVariable("keyword") String keyword,
+    @RequestMapping(value = "/filter", method = RequestMethod.POST)
+    public String searchProperties(@RequestParam("category") String category,
+                                   @RequestParam("location") String location,
+                                   @RequestParam("keyword") String keyword,
                                    Model model){
 
-        System.out.println(category+" "+location+"  "+keyword);
-        return "";
+        List<Property> pFilter = new ArrayList<>();
+        List<Property> properties = propertyService.getAllProperties();
+
+        if(category.isEmpty() && location.isEmpty() && keyword.isEmpty()){
+            model.addAttribute("properties", properties);
+            model.addAttribute("path", PATH);
+            return "property/property_listing";
+        }
+
+        if(!category.isEmpty()){
+            pFilter = properties.stream().filter(p-> p.getPCategory().equalsIgnoreCase(category)).collect(Collectors.toList());
+        }
+        if(!location.isEmpty()){
+            pFilter = pFilter.stream().filter(p-> p.getPLocation().getCity().equalsIgnoreCase(location)).collect(Collectors.toList());
+        }
+
+        if(!keyword.isEmpty()){
+            pFilter = pFilter.stream().filter(p->p.getPTitle().contains(keyword) || p.getPDescription().contains(keyword)).collect(Collectors.toList());
+        }
+
+        model.addAttribute("properties", pFilter);
+        model.addAttribute("path", PATH);
+        return "property/property_listing";
     }
 
 }

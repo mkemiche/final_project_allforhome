@@ -27,8 +27,11 @@ public class PrivateUser extends User {
     @Size(min = 3, max = 30, message = "This field must be between 3 and 30 characters")
     private String username;
 
+    private Long id;
+
     public PrivateUser(String email, String password, String roles, String username) {
         super(email, password, roles);
         this.username = username;
+        this.id = super.getUId();
     }
 }

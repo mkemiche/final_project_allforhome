@@ -2,8 +2,12 @@ package io.allforhome.controllers;
 
 import io.allforhome.enums.Status;
 import io.allforhome.models.Property;
+import io.allforhome.models.User;
+import io.allforhome.security.AppUserDetails;
 import io.allforhome.services.PropertyService;
+import io.allforhome.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +26,11 @@ import java.util.stream.Collectors;
 @SessionAttributes("user")
 public class homeController {
 
+    @Autowired
     private PropertyService propertyService;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     public homeController(PropertyService propertyService) {
@@ -37,13 +45,20 @@ public class homeController {
     @GetMapping("/")
     public String home(Model model){
         String path = File.separator+"fileupload" + File.separator;
+        var user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(user instanceof AppUserDetails){
+            String username = ((AppUserDetails) user).getUsername();
+            User user1 = userService.findUserByEmail(username).get();
+            model.addAttribute("user_id", user1.getUId());
+        }
+
         List<Property> propertiesForSale = propertyService.getAllProperties().stream().filter(e->e.getPStatus().equals(Status.SALE.name())).collect(Collectors.toList());
         List<Property> propertiesForRent = propertyService.getAllProperties().stream().filter(e->e.getPStatus().equals(Status.RENT.name())).collect(Collectors.toList());
         propertiesForSale.sort((o1, o2) -> o2.getId().compareTo(o1.getId()));
         propertiesForRent.sort((o1, o2) -> o2.getId().compareTo(o1.getId()));
 
-        model.addAttribute("propertiesSale", propertiesForSale);
-        model.addAttribute("propertiesRent", propertiesForRent);
+        model.addAttribute("propertiesSale", propertiesForSale.stream().limit(4).collect(Collectors.toList()));
+        model.addAttribute("propertiesRent", propertiesForRent.stream().limit(4).collect(Collectors.toList()));
         model.addAttribute("path", path);
         return "index";
     }
